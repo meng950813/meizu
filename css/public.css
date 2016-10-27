@@ -1,0 +1,43 @@
+body,html,div,header,nav,section,footer,p,aside
+h1,h2,h3,h4,h5,h6,
+form,button,input,
+ul,ol,dl,li,a,span,label,input{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body,html{
+	width: 100%;
+	height: 100%;
+}
+body{
+	font:normal normal 14px/20px Helvetica,Tahoma,Arial,"Hiragino Sans GB","Microsoft YaHei",SimSun,Heiti,sans-serif;
+	color: #333;
+	background: #f2f2f2;
+}
+a{
+	color: #333;
+	text-decoration: none;
+}
+a:hover{color: #31A5E7;}
+ol,ul,dl{list-style: none;}
+
+#container:after,.left-part:after,.right-part:after{
+	content: "";
+	display: block;
+	clear: both;
+}
+.left-part,.right-part{	
+	background: #fff;
+	border: 1px solid #e6e6e6;
+}
+.left-part{
+	float: left;
+	width: 716px;
+	margin-bottom: 20px;
+}
+.right-part{
+	float: right;
+	width: 304px;
+	padding: 15px;
+}
