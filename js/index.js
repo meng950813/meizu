@@ -14,9 +14,9 @@ var slider = {
 
 	init:function(imgs){
 		this.imgs = imgs;
-		this.banner_box = $(".banner-img-box");
-		this.banner_footer_small = $("#banner-footer-small");
-		this.banner_footer_title = $("#banner-footer-title");
+		this.banner_box = $$(".banner-img-box");
+		this.banner_footer_small = $$("#banner-footer-small");
+		this.banner_footer_title = $$("#banner-footer-title");
 		
 		// 填充轮播图
 		this.updateView();
@@ -25,18 +25,17 @@ var slider = {
 
 		// 设置响应事件
 		// 上一个：左移一格
-		$("#banner-left-row").onclick = function(){this.move(-1);}.bind(this);
+		$$("#banner-left-row").onclick = function(){this.move(-1);}.bind(this);
 		// 下一个：右移一格
-		$("#banner-right-row").onclick = function(){this.move(1);}.bind(this);
+		$$("#banner-right-row").onclick = function(){this.move(1);}.bind(this);
 
 		// 换图事件
 		this.banner_footer_small.addEventListener("click",function(e){
+			
 			// 点击的图不是当前正在显示的图
-			console.log(e.target.nodeName);
 			if(e.target.nodeName == "IMG"){
 				var target = e.target.parentNode;
 				if (target.className.indexOf("active") == -1) {
-					console.log(123);
 					var nowIndex = parseInt(target.parentNode.querySelector(".active").getAttribute("data-index"));
 					var toIndex = parseInt(target.getAttribute("data-index"));
 					
@@ -60,49 +59,52 @@ var slider = {
 		clearInterval(this.timer);
 		this.timer = null;
 
-
 		// 正常方向移动 ；向左
 		if(n>0){
-			this.step = this.imgWidth * n / this.allStep;
-			this.animation = setInterval(this.animate.bind(this,-1,n),0);
-			// this.banner_box.style.left = -this.imgWidth * n+"px";
-			// console.log(this.banner_box);
-			// $(".banner-img-box").style.left = -this.imgWidth * n+"px";
+			$$(".banner-img-box").style.transitionDuration = "1s";
+			$$(".banner-img-box").style.left = -this.imgWidth * n+"px";
+
+			// $$(".banner-img-box").style.left = -this.imgWidth * n+"px";
 			// 调整数组位置
-			// this.imgs = this.imgs.concat(this.imgs.splice(0, n));
-			// this.updateView();
+			this.imgs = this.imgs.concat(this.imgs.splice(0, n));
+
+			// 延迟执行,给动画展示时间
+			this.animation = setTimeout(function(){
+					this.updateView();
+
+					$$(".banner-img-box").style.transitionDuration = "0s";
+					$$(".banner-img-box").style.left = 0;
+					
+					this.autoMove();
+
+				}.bind(this),
+				1000);
 		}
 		else{
 			this.imgs = this.imgs.splice(this.imgs.length + n, -n).concat(this.imgs);
-			// this.updateView();
-			this.step = this.imgWidth * n / this.allStep;
-			this.animation = setInterval(this.animate.bind(this,1,n),0);
-			// this.banner_box.style.left = -this.imgWidth * n +"px";
+			this.updateView();
+
+			$$(".banner-img-box").style.transitionDuration = "1s";
+			// $$(".banner-img-box").style.left = 0;
+			
+			this.banner_box.style.left = this.imgWidth * -n + "px";
+			this.animation = setTimeout(function(){
+					$$(".banner-img-box").style.transitionDuration = "0s";
+					$$(".banner-img-box").style.left = 0;
+				},1000);
 		}
 
 		// this.autoMove();
 	},
 
-	animate:function(dir,n){
-		var style = getComputedStyle(this.banner_box);
-		this.banner_box.style.left = parseFloat(style.left) + dir*this.step+"px";
-		this.moved++;
-
-		if (this.moved >= this.allStep) {
-			clearInterval(this.animation);
-			this.animation = null;
-			this.moved = 0;
-			if(n>0){
-				this.imgs = this.imgs.concat(this.imgs.splice(0, n));
-			}
-				this.updateView();
-			this.banner_box.style.left = 0;
-			this.autoMove();
-		}
-	},
 
 	updateView : function(){
 		var banner = "",small = "";
+		clearTimeout(this.animation);
+		this.animation = null;
+		// debugger;
+		
+		
 		for(var i  in this.imgs){
 			var img = this.imgs[i];
 			banner += "<li><a href='"+img.href+"'><img src='"+img.src+"' alt='"+img.title+"'/></a></li>";
@@ -121,6 +123,7 @@ var slider = {
 				child.className = "";
 			}
 		}
+
 	},
 
 	setIndex:function(){

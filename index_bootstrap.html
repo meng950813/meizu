@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index_bootstrap</title>
+	<!-- <link rel="stylesheet" href="css/public.css"> -->
+	<!-- <link rel="stylesheet" href="css/header_footer.css"> -->
+	<!-- <link rel="stylesheet" href="css/index.css"> -->
+	<link rel="stylesheet" href="bootstrap/less/bootstrap.css">
+	<link rel="stylesheet" href="css/index_bootstrap.css">
+	<link rel="stylesheet" href="css/public_bootstrap.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	
+		<!-- 导航栏 -->
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="header">
+				<!-- logo -->
+				<a href="index_bootstrap.html" class="navbar-brand">Logo</a>
+	
+				<a href="#menu" class="navbar-toggle" data-toggle="collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<div class="nav-tip pull-right">
+					<span class="glyphicon glyphicon-search search-btn"></span>
+					
+					<div class="not-signin">
+						<a href="login_bootstrap.html">登录</a>
+						<span>|</span>
+						<a href="register_bootstrap.html">注册</a>
+					</div>
+					<div class="sign-in">
+						<div class="user-avatar">
+							<a href="#">
+								<img src="imgs/user_icon_1.jpg" alt="">
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 搜索栏 -->
+	<div class="search-form-box">
+		<div class="container">
+			<span class="close">&times;</span>
+			<div class="row">
+				<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+					<form id="search-form" class="has-feedback">
+						<input type="text" placeholder="请输入搜索内容" class="form-control" name="search-text">
+						<span class="glyphicon glyphicon-search form-control-feedback" id="search"></span>
+					</form>
+				</div>
+				<div class="row">
+					<div id="search-result" class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+						<!-- 帖子列表 -->
+						<div class="search-result-list">
+								<a href="#" class="search-result-topic">搜索内容搜索内容搜索内容搜索内容搜索内容搜索内容</a>
+								<p class="discription">&nbsp;文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述</p>							
+							<div class="pull-left">
+								<span class="view-num"><i></i>123</span>
+								<span class="comment-num"><i></i>321</span>
+							</div>
+						</div>
+						<!-- 用户列表 -->
+						<div class="search-result-list">
+							<div class="user-icon">
+								<a href="#" class="">
+									<img src="imgs/user_icon_1.jpg" alt="">
+								</a>
+							</div>
+							<div class="user-discription">
+								<a href="#" class="search-result-topic">用户名</a>
+								<p class="discription">个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+
+	<!-- 内容区域 -->
+	<div class="container">
+
+
+		<div id="menu" class="navbar-collapse collapse">
+			<ul>
+				<li><a class="active" href="index_bootstrap.html">首页</a></li>
+				<li><a href="topic_index_bootstrap.html">综合讨论</a></li>
+				<li><a href="#">魅蓝手机</a></li>
+				<li><a href="#">摄影天地</a></li>
+				<li><a href="#">全部版块</a></li><li><a href="#">摄影天地</a></li>
+				<li><a href="#">全部版块</a></li><li><a href="#">摄影天地</a></li>
+				<li><a href="#">全部版块</a></li>
+			</ul>
+		</div>
+
+		<div id="carousel-banner" class="left-part carousel slide" data-ride="carousel" data-interval="3000">
+			<!-- 轮播图容器 -->
+			<div class="carousel-inner">
+				<!-- <div class="item active"> -->
+					<img src="imgs/banner_1.jpg" alt="">
+					<div class="carousel-caption">
+						<span>discraption</span>
+					</div>
+			<!-- 	</div>
+				<div class="item">
+					<img src="imgs/banner_2.jpg" alt="">
+					<div class="carousel-caption">
+						<span>discraption</span>
+					</div>
+				</div>
+				<div class="item">
+					<img src="imgs/banner_3.jpg" alt="">
+					<div class="carousel-caption">
+						<span>discraption</span>
+					</div>
+				</div>				 -->
+			</div>
+
+			<!-- Controls -->
+		  <a class="left carousel-control" href="#carousel-banner" role="button" data-slide="prev">
+		    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		    <span class="sr-only">Previous</span>
+		  </a>
+		  <a class="right carousel-control" href="#carousel-banner" role="button" data-slide="next">
+		    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		    <span class="sr-only">Next</span>
+		  </a>
+			
+			<!-- 序号指示器 -->
+			<ul class="carousel-indicators">
+				<li data-target="#carousel-banner" data-slide-to="0" class="active"></li>
+				<li data-target="#carousel-banner" data-slide-to="1"></li>
+				<li data-target="#carousel-banner" data-slide-to="2"></li>
+			</ul>
+		</div>
+
+		<div class="right-part">
+			<!-- 签到 -->
+			<a href="#">
+				<div calss="signin_expand">
+					<span calss="today-week">星期二</span>
+					<span calss="has-signined">签到</span>
+				</div>
+			</a>
+			<!-- 兑换商城 + 幸运抽奖 -->
+			<div id="shop">
+				<a href="#">
+					<img src="imgs/shop.png" alt="">
+				</a>
+				<a href="#" class="lottery">
+					<img src="imgs/lottery.png" alt="">
+				</a>
+			</div>
+			<!-- 热门版块 -->
+			<ul id="hot-area">
+				<p>热门版块</p>
+				<li><a href="#">综合讨论</a></li>
+				<li><a href="#">魅族手机</a></li>
+				<li><a href="#">没蓝手机</a></li>
+				<li><a href="#">综合讨论</a></li>
+				<li><a href="#">综合讨论</a></li>
+				<li><a href="#">综合讨论</a></li>
+				<li><a href="#">综合讨论</a></li>
+				<li><a href="#">综合讨论</a></li>
+				<li><a href="#">综合讨论</a></li>
+				<li><a href="#">综合讨论</a></li>
+			</ul>
+			<div id="newest-action">
+				<h3 class="right-part-title">最新活动</h3>
+				<dl>
+					<dt>
+						<a href="#" title="怪不得我会喜欢你">
+							<img src="imgs/newest_action_1.jpg" alt="怪不得我会喜欢你">
+						</a>
+					</dt>
+					<dd>
+						<h4 title="怪不得我会喜欢你怪不得我会喜欢你">怪不得我会喜欢你怪不得我会喜欢你</h4>
+						<p class="action-sub-title">怪不得我会喜欢你怪不得我会喜欢你怪不得怪不得我会喜欢你怪不得我会喜欢你怪不得</p>
+						<a href="#">立即参加</a>
+					</dd>
+				</dl>
+				<dl>
+					<dd>
+						<h4 title="怪不得我会喜欢你怪不得我会喜欢你">怪不得我会喜欢你怪不得我会喜欢你</h4>
+						<p class="action-sub-title">怪不得我会喜欢你怪不得我会喜欢你怪不得</p>
+						<a href="#">立即参加</a>
+					</dd>
+					<dt>
+						<a href="#" title="怪不得我会喜欢你">
+							<img src="imgs/newest_action_2.jpg" alt="怪不得我会喜欢你">
+						</a>
+					</dt>
+				</dl>
+			</div>
+
+			<!-- 新人课堂 -->
+			<div id="new-user-class">
+				<h3 class="right-part-title">新人课堂</h3>
+				<div>
+					<a href="#">
+						<img src="imgs/new_user_class.jpg" alt="">
+					</a>
+				</div>
+				
+				<ul id="new-user-classname">
+					<li><a href="#">系统教程</a></li>
+					<li><a href="#">新人指引</a></li>
+					<li><a href="#">社区版规</a></li>
+					<li><a href="#">反馈建议</a></li>
+					<li><a href="#">版务申诉</a></li>
+					<li><a href="#">服务支持</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="left-part">
+			<div class="container hot-topic">
+				<div class="row">
+					<!-- 社区热帖 -->
+					<div class="col-xs-12 hot-topic-head">
+								<h3>社区热帖</h3>
+								<h5>今日发帖：<span id="today-topic">33550</span>
+								会员：<span id="member">3350</span></h5>
+					</div>
+					
+					<div class="col-xs-12 col-md-6">
+						<a href="#" class="user-avatar">
+							<img src="imgs/user_icon_2.jpg" alt="username">
+						</a>
+						<!-- 用户信息：隐藏内容 -->
+						<div class="user-info">
+							<img src="imgs/user_icon_2.jpg" alt="">
+							<div class="info">
+								<a href="#">username</a>
+								<p>个人说明</p>
+								<p>
+									帖子：<span class="topic-num">300</span>
+									收听：<span class="listen-num">300</span>
+									听众：<span class="listener-num">300</span>
+								</p>
+								<p></p>
+								<button class="listen-he">收听他</button>
+							</div>
+						</div>
+						<div class="topic-context">
+							<a href="#" class="topic-title">魅族商城 M 码系统升级公告魅族商城 M 码系统升级公告</a>
+							<p>
+								<span class="username">usernameusernameusername</span>
+								<span class="view-num"><i></i>3044</span>
+								<span class="comment-num"><i></i>233</span>
+							</p>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-6">
+						<a href="#" class="user-avatar">
+							<img src="imgs/user_icon_2.jpg" alt="username">
+						</a>
+						<!-- 用户信息：隐藏内容 -->
+						<div class="user-info">
+							<img src="imgs/user_icon_2.jpg" alt="">
+							<div class="info">
+								<a href="#">username</a>
+								<p>个人说明</p>
+								<p>
+									帖子：<span class="topic-num">300</span>
+									收听：<span class="listen-num">300</span>
+									听众：<span class="listener-num">300</span>
+								</p>
+								<p></p>
+								<button class="listen-he">收听他</button>
+							</div>
+						</div>
+						<div class="topic-context">
+							<a href="#" class="topic-title">魅族商城 M 码系统升级公告魅族商城 M 码系统升级公告</a>
+							<p>
+								<span class="username">username</span>
+								<span class="view-num"><i></i>3044</span>
+								<span class="comment-num"><i></i>233</span>
+							</p>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-6">
+						<a href="#" class="user-avatar">
+							<img src="imgs/user_icon_2.jpg" alt="username">
+						</a>
+						<!-- 用户信息：隐藏内容 -->
+						<div class="user-info">
+							<img src="imgs/user_icon_2.jpg" alt="">
+							<div class="info">
+								<a href="#">username</a>
+								<p>个人说明</p>
+								<p>
+									帖子：<span class="topic-num">300</span>
+									收听：<span class="listen-num">300</span>
+									听众：<span class="listener-num">300</span>
+								</p>
+								<p></p>
+								<button class="listen-he">收听他</button>
+							</div>
+						</div>
+						<div class="topic-context">
+							<a href="#" class="topic-title">魅族商城 M 码系统升级公告魅族商城 M 码系统升级公告</a>
+							<p>
+								<span class="username">username</span>
+								<span class="view-num"><i></i>3044</span>
+								<span class="comment-num"><i></i>233</span>
+							</p>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-6">
+						<a href="#" class="user-avatar">
+							<img src="imgs/user_icon_2.jpg" alt="username">
+						</a>
+						<!-- 用户信息：隐藏内容 -->
+						<div class="user-info">
+							<img src="imgs/user_icon_2.jpg" alt="">
+							<div class="info">
+								<a href="#">username</a>
+								<p>个人说明</p>
+								<p>
+									帖子：<span class="topic-num">300</span>
+									收听：<span class="listen-num">300</span>
+									听众：<span class="listener-num">300</span>
+								</p>
+								<p></p>
+								<button class="listen-he">收听他</button>
+							</div>
+						</div>
+						<div class="topic-context">
+							<a href="#" class="topic-title">魅族商城 M 码系统升级公告魅族商城 M 码系统升级公告</a>
+							<p>
+								<span class="username">username</span>
+								<span class="view-num"><i></i>3044</span>
+								<span class="comment-num"><i></i>233</span>
+							</p>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-6">
+						<a href="#" class="user-avatar">
+							<img src="imgs/user_icon_2.jpg" alt="username">
+						</a>
+						<!-- 用户信息：隐藏内容 -->
+						<div class="user-info">
+							<img src="imgs/user_icon_2.jpg" alt="">
+							<div class="info">
+								<a href="#">username</a>
+								<p>个人说明</p>
+								<p>
+									帖子：<span class="topic-num">300</span>
+									收听：<span class="listen-num">300</span>
+									听众：<span class="listener-num">300</span>
+								</p>
+								<p></p>
+								<button class="listen-he">收听他</button>
+							</div>
+						</div>
+						<div class="topic-context">
+							<a href="#" class="topic-title">魅族商城 M 码系统升级公告魅族商城 M 码系统升级公告</a>
+							<p>
+								<span class="username">username</span>
+								<span class="view-num"><i></i>3044</span>
+								<span class="comment-num"><i></i>233</span>
+							</p>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+		<!-- 精选图文topic -->
+		<div class="left-part featured-topic">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6">
+						<img src="imgs/index_topic_1.png" alt="">
+					</div>
+					<div class="col-xs-12 col-sm-6 featured-topic-content">
+						<div class="topic-tag">
+							<button class="btn btn-info">综合讨论</button>
+						</div>
+						<a href="#" title="创业就能改变世界？" class="featured-topic-title">创业就能改变世界？创业就能改变世界？创业就能改变世界？创业就能改变世界？创业就能改变世界？创业就能改变世界？创业就能改变世界？创业就能改变世界？</a>
+						<div class="topic-info">
+							<span class="view-num"><i></i>5869</span>
+							<span class="comment-num"><i></i>1589</span>
+							<a href="#" class="publisher" title="有谱视频">有谱视频</a>
+							<span class="publish-time">昨天 19:24</span>
+							<a href="#" class="read-all">阅读全文</a>
+						</div>
+						<p class="topic-sub-title">
+							年轻如你热血沸腾，今天要出任CEO，迎娶白富美；明天就要成为上天入地的马斯克或是感化世界的马云。
+						</p>
+						<a class="share-weibo" href="#"></a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-6">
+						<img src="imgs/index_topic_1.png" alt="">
+					</div>
+					<div class="col-xs-12 col-sm-6 featured-topic-content">
+						<div class="topic-tag">
+							<button class="btn btn-info">综合讨论</button>
+						</div>
+						<a href="#" title="创业就能改变世界？" class="featured-topic-title">创业就能改变世界？创业就能改变世界？创业就能改变世界？创业就能改变世界？创业就能改变世界？创业就能改变世界？创业就能改变世界？创业就能改变世界？</a>
+						<div class="topic-info">
+							<span class="view-num"><i></i>5869</span>
+							<span class="comment-num"><i></i>1589</span>
+							<a href="#" class="publisher" title="有谱视频">有谱视频</a>
+							<span class="publish-time">昨天 19:24</span>
+							<a href="#" class="read-all">阅读全文</a>
+						</div>
+						<p class="topic-sub-title">
+							年轻如你热血沸腾，今天要出任CEO，迎娶白富美；明天就要成为上天入地的马斯克或是感化世界的马云。
+						</p>
+						<a class="share-weibo" href="#"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<footer id="footer-box">
+		<a href="#">关于魅族</a>
+		<a href="#">法律声明</a>
+		<a href="#">工作机会</a>
+		<a href="#">联系我们</a>
+			
+		<div class="lang-list dropdown list-unstyle">
+			<a href="javascript:void(0)"  data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span>简体中文</a>
+			<ul class="dropdown-menu">
+				<li><b>国家或者地区</b></li>
+				<li><a href="#">繁體中文</a></li>
+				<li><a href="#">台灣繁體</a></li>
+				<li><a href="#">English</a></li>
+				<li><a href="#">Indonesia</a></li>
+				<li><a href="#">Русский</a></li>
+				<li><a href="#">עברית</a></li>
+				<li><a href="#">India</a></li>
+			</ul>
+		</div>			
+	</footer>
+
+	<script src="bootstrap/js/jquery-1.11.3.js"></script>
+	<script src="bootstrap/js/bootstrap.js"></script>
+	<script src="js/public.js"></script>
+	<script src="js/index_jquery.js"></script>
+</body>
+</html>

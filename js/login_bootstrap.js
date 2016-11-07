@@ -6,12 +6,11 @@ function setCanvasWidth(){
 	// 获取input 宽度
 	var input_width = getComputedStyle(vali_box).width;
 	var input_height = getComputedStyle(vali_box).height;
-	console.log(input_height);
+	
 	// 去掉 最后的 px ,转为整型
 	input_width = parseInt(input_width.slice(0, input_width.length-2));
 	input_height = parseInt(input_height.slice(0, input_height.length-2));
 
-	console.log(input_height);
 	if (validate.width != input_width) {
 		// 设置 canvas 宽高与input宽高相同
 		validate.width = input_width;

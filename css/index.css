@@ -8,6 +8,7 @@ ul.banner-img-box{
 	width: 2160px;
 	overflow: hidden;
 	position: relative;
+	transition: left .3s linear;
 }
 ul.banner-img-box>li{
 	float: left;

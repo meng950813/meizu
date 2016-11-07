@@ -101,7 +101,7 @@ body{
 }
 .search-form-box{
 	position: absolute;
-	top: 55px;
+	top: 50px;
 	right: 0;
 	bottom: 0;
 	left: 0;
@@ -364,9 +364,7 @@ body{
 .recommend-username > a{
 	display: block;
 	line-height: 3rem;
-	font-size: 1.1em;
 	padding: 0 5px;
-	// width: 200px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap; 

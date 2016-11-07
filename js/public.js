@@ -256,6 +256,7 @@ $(".change-recommend").on('click', function(event) {
 	}.bind(this),2000);
 });
 
+	ctx : null, // canvas 对象
 /* 判断 文本内容，防止 sql 注入 */
 window.preventSql = function(context){
 	var reg = /^.*["',\\/*].*$/ig;
