@@ -256,9 +256,88 @@ $(".change-recommend").on('click', function(event) {
 	}.bind(this),2000);
 });
 
-// 绘制canvas u验证码
-window.drawValidate = {
-	ctx : null, // canvas 对象
-	width : 0, // canvas 宽高
-	hight: 0,
+/* 判断 文本内容，防止 sql 注入 */
+window.preventSql = function(context){
+	var reg = /^.*["',\\/*].*$/ig;
+	return  reg.test(context);
+}
+
+/* 绘制 canvas 验证码 */
+var drawValidate = {
+	ctx:null, // canvas 画布
+	width: 0, // canvas 宽度
+	height: 0, // canvas 高度
+	// 数据池，用于生成随机字符
+	dataPool:"0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM",
+	inteval:0, // 字符间距
+	// 生成验证码位数
+	count : 4,
+	// 最后生成结果
+	result : "",
+
+	init : function(canvasId){
+		this.width = canvasId.width;
+		this.height = canvasId.height;
+		this.ctx = canvasId.getContext("2d");
+
+		this.inteval = this.width/(this.count+1);
+
+		this.draw();
+
+		$(canvasId).on('click', function(event) {
+			event.preventDefault();
+			this.draw();
+		}.bind(this));
+
+		/* 设置 */
+	},
+
+	// 生成随机数
+	getRN : function(min,max){
+		return Math.floor(Math.random()*(max - min) + min);
+	},
+
+	// 生成随机颜色
+	getRC : function(min,max){
+		return "rgb("+this.getRN(min,max)+","+this.getRN(min,max)+","+this.getRN(min,max)+")";
+	},
+
+	// 绘制验证码
+	draw : function(){
+
+		this.ctx.clearRect(0,0,this.width-20,this.height-10);
+		this.result = "";
+		// 设置背景
+		this.ctx.fillStyle = this.getRC(180,230);
+		this.ctx.fillRect(0,0,this.width,this.height);
+
+		// 设置文本基线
+		this.ctx.textBaseline = "bottom";
+
+		for(var i = 0; i < this.count ; i++){
+			// 设置字体及大小
+			this.ctx.font = this.getRN(18,48)+"px Arial";
+			var char = this.dataPool[this.getRN(0,this.dataPool.length)];
+			this.result += char;
+
+			// 设置文本坐标
+			var x = i* this.inteval + 20;
+			var y = this.height;
+			
+			// 生成文本随机颜色,填充文字
+			this.ctx.fillStyle = this.getRC(30,100);
+			this.ctx.fillText(char,x,y);
+
+			// 生成干扰线
+			this.ctx.beginPath();
+			this.ctx.strokeStyle = this.getRC(90,200);
+			this.ctx.moveTo(this.getRN(0,this.width),this.getRN(0,this.height));
+			this.ctx.lineTo(this.getRN(0,this.width),this.getRN(0,this.height));
+			this.ctx.closePath();
+			this.ctx.stroke();
+		}
+	},
+	getValidate : function(){
+		return  this.result;
+	}
 }
