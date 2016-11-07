@@ -126,7 +126,7 @@
 
 /* 一条评论 */
 .has-blockquote{
-	padding-left: 1em;
+	padding-left: 0.5em;
 }
 .comment-list{
 	padding: 1em 0;
