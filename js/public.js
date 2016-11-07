@@ -255,3 +255,10 @@ $(".change-recommend").on('click', function(event) {
 		});
 	}.bind(this),2000);
 });
+
+// 绘制canvas u验证码
+window.drawValidate = {
+	ctx : null, // canvas 对象
+	width : 0, // canvas 宽高
+	hight: 0,
+}
