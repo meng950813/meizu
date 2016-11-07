@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>注册页</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" href="css/register_bootstrap.css">
+</head>
+<body>
+	<!-- 简易导航栏 -->
+	<nav id="login-nav">
+		<div class="container">
+			<a href="topic_index_bootstrap.html">
+				<div class="logo">
+				Logo
+				</div>
+			</a>
+			<div class="options">
+				<a href="login_bootstrap.html">登录</a>
+				<span>|</span>
+				<a href="register_bootstrap.html" class="active">注册</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container login-form-box">
+		<div class="login-logo">
+			Logo
+		</div>
+		<form action="#" id="login-form">
+			<div class="line">
+				<div class="tips-show">4-16位字符，支持数字,字母,下划线</div>
+				<div class="tips"></div>
+				<i class="input-icon-tip" id="username-icon"></i>
+				<input type="text" name="username" id="username" placeholder="用户名">
+			</div>
+			<div class="line">
+				<div class="tips"></div>
+				<div class="tips-show">6-24位字母,数字,下划线</div>
+				<i class="input-icon-tip" id="pwd-icon"></i>
+				<input type="text" id="pwd-show" class="not-show" placeholder="密码" maxlength="24" minlength="8">
+				<input type="password" id="pwd" name="pwd" placeholder="密码" maxlength="24" minlength="8">
+				<span id="see-pwd-btn" class="see-icon"></span>
+			</div>
+			<div class="line">
+				<div class="tips"></div>
+				<i class="input-icon-tip" id="phone-icon"></i>
+				<input type="phone" name="phone" id="phone" placeholder="手机号">
+			</div>
+			<div class="line">
+				<div class="tips"></div>
+				<i class="input-icon-tip" id="email-icon"></i>
+				<input type="email" name="email" id="email" placeholder="邮箱">
+			</div>
+			<input type="submit" id="sub" value="注册">
+		</form>
+	</div>
+
+	<canvas id="login-bg"></canvas>
+</body>
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/register_bootstrap.js"></script>
+</html>
