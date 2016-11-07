@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>topic detail bootstrap</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="bootstrap/less/bootstrap.css">
+	<link rel="stylesheet" href="css/public_bootstrap.css">
+	<link rel="stylesheet" href="css/topic_detail_bootstrap.css">
+</head>
+<body>
+	<!-- 顶部 -->
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="header">
+				<!-- logo -->
+				<a href="index_bootstrap.html" class="navbar-brand">Logo</a>
+	
+				<a href="#menu" class="navbar-toggle" data-toggle="collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<div class="nav-tip pull-right">
+					<span class="glyphicon glyphicon-search search-btn"></span>
+					
+					<div class="not-signin">
+						<a href="login_bootstrap.html">登录</a>
+						<span>|</span>
+						<a href="register_bootstrap.html">注册</a>
+					</div>
+					<div class="sign-in">
+						<div class="user-avatar">
+							<a href="#">
+								<img src="imgs/user_icon_1.jpg" alt="">
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<!-- 导航栏 -->
+		<div id="menu" class="navbar-collapse collapse">
+			<ul>
+				<li><a href="#">首页</a></li>
+				<li class="active"><a href="topic_index_bootstrap.html">综合讨论</a></li>
+				<li><a href="#">魅蓝手机</a></li>
+				<li><a href="#">摄影天地</a></li>
+				<li><a href="#">全部版块</a></li><li><a href="#">摄影天地</a></li>
+				<li><a href="#">全部版块</a></li><li><a href="#">摄影天地</a></li>
+				<li><a href="#">全部版块</a></li>
+			</ul>
+		</div>
+
+		<div class="left-part">
+			<div class="topic-dir color-999">
+				<a href="#">互动社区</a> &gt;
+				<a href="topic_index_bootstrap.html">综合讨论</a>
+			</div>
+			
+			<div class="header-user-info">
+				<div class="user-avatar">
+					<a href="#">
+						<img src="imgs/user_icon_1.jpg" alt="">
+					</a>
+				</div>
+				<!-- 用户信息：隐藏内容 -->
+				<div class="user-info">
+					<img src="imgs/user_icon_1.jpg" alt="">
+					<div class="info">
+						<a href="#" class="inline-block">username</a>
+						<span class="honor"><img src="imgs/mzvip3.jpg" alt="">魅族版主</span>
+						<p>个人说明</p>
+						<p>
+							帖子：<span class="topic-num">100</span>
+						</p>
+						<p>
+							收听：<span class="listen-num">200</span>
+						</p>
+						<p>
+							听众：<span class="listener-num">300</span>
+						</p>
+						<button class="listen-he">收听他</button>
+					</div>
+				</div>
+				<div class="topic-detail-head">
+					<h3><a href="#" class="color-black">做个好版主还是坏版主？</a></h3>
+					<div class="sub-title">
+						<div class="owner-info inline-block">
+							<a href="#" title="大大大大森"><b>大大大大森</b></a>
+							<span class="color-999"><img src="imgs/mzvip3.jpg" alt=""> 魅友版主</span>
+
+							<span class="share-btn color-black">分享到：</span>
+						</div>
+						<div class="pull-right publish-info">
+							<span class="publish-time">2013年3月</span>
+							<span class="view-num"><i></i>321</span>
+							<span class="comment-num"><i></i>123</span>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+			<div class="topic-detail-context">
+				
+				啦啦啦德玛西亚<br>
+				&nbsp;啦啦啦德玛西亚<br>
+				啦啦啦德玛西亚<br>
+				<img src="imgs/banner_1.jpg" alt="">
+				啦啦啦啦啦德玛西亚<br>
+				<img src="imgs/user_icon_1.jpg" alt="">
+				啦啦啦啦啦德玛西亚<br>
+				<img src="imgs/banner_5.jpg" alt="">
+				啦啦啦德玛西亚<br>
+			</div>
+			<div class="option pull-right">
+				<a href="#" class="support-btn">支持</a>
+				<a href="#" class="oppose-btn">反对</a>
+				<a href="#" class="reply-btn">回复</a>
+			</div>
+		</div>
+
+		<div class="right-part">
+			<!-- 签到 -->
+			<div id="signin-expand">
+				<span id="today-week">星期日</span>
+				<span id="has-signined">签到</span>
+			</div>
+			
+			<!-- 最新帖子 -->
+			<div class="new-topic">
+				<div class="new-topic-head">
+					<a href="#" title="用户名用户名用户名用户名">用户名用户名用户名用户名</a>的最新帖子
+				</div>
+				<ul class="new-topic-list">
+					<li><a href="#">帖子1</a></li>
+					<li><a href="#">帖子2</a></li>
+					<li><a href="#">帖子3</a></li>
+					<li><a href="#">帖子4</a></li>
+				</ul>
+			</div>
+
+			<!-- 推荐的人 -->
+			<div class="recommend">
+				<div class="recommend-title">
+					推荐的人
+					<span class="change-recommend color-black">
+						<i class="glyphicon glyphicon-refresh"></i> 换一批
+					</span>
+				</div>
+				
+				<div class="recommend-list">
+					<div class="inline-block user-avatar">
+						<a href="#">
+							<img src="imgs/user_icon_1.jpg" alt="">
+						</a>
+					</div>
+					<div class="recommend-username">
+						<a href="#">用户名用户名用户名用户名用户名</a>
+					</div>
+				</div>
+				<div class="recommend-list">
+					<div class="inline-block user-avatar">
+						<a href="#">
+							<img src="imgs/user_icon_1.jpg" alt="">
+						</a>
+					</div>
+					<div class="recommend-username">
+						<a href="#">用户名用户名用户名用户名用户名</a>
+					</div>
+				</div>					
+			</div>
+
+			<!-- 推荐阅读 -->
+			<div class="recommend-topic">
+				<div class="recommend-title">
+					推荐阅读
+					<span class="change-recommend color-black">
+						<i class="glyphicon glyphicon-refresh"></i> 换一批
+					</span>
+				</div>
+				<ul class="recommend-list">
+					<li><a href="#">帖子1</a></li>
+					<li><a href="#">帖子1</a></li>
+					<li><a href="#">帖子1</a></li>
+					<li><a href="#">帖子1</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- 评论列表 -->
+		<div class="left-part">
+			<div class="comment-list-head">
+				<span class="total-comment-num">999</span>条回复
+				<span class="pull-right arrive-floor">
+					<button  id="to-floor-btn">楼层直达</button>
+					<input type="number" min="1" id="to-floor" title="跳转到指定楼层">
+				</span>
+			</div>
+
+			<div class="comment-list">
+				<div class="comment-detail">
+					<div class="user-avatar ">
+						<a href="#" name="floor-1">
+							<img src="imgs/user_icon_1.jpg" alt="">
+						</a>
+					</div>
+					<div class="user-info">
+						<img src="imgs/user_icon_1.jpg" alt="">
+						<div class="info">
+							<p>
+								<a href="#" class="inline-block set-hide-user-name" title="用户名">username 明个人说明 username usernam eusernam </a>
+								<em class="honor inline-block"><img src="imgs/mzvip3.jpg"> 魅族版主</em>
+							</p>
+
+							<p>个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说个人说明个人说明个人说明个人说明</p>
+							<p>
+								帖子：<span class="topic-num">100</span>
+								收听：<span class="listen-num">200</span>
+								听众：<span class="listener-num">300</span>
+							</p>
+							<a href="#" class="pull-right">更多信息&gt;&gt;</a>
+						</div>
+					</div>
+					<div class=" comment-detail-body">
+						<div class="comment-detail-head">
+							<div class="owner-info">
+								<a href="#" title="大大大大森" class="set-user-name">大大大大森</a>
+								<span><img src="imgs/mzvip3.jpg" alt=""> 魅友版主</span>
+								<span class="publish-time">2013年3月</span>
+								<span class="pull-right color-999">沙发</span>
+							</div>							
+						</div>
+						<!-- 引用内容 -->
+						<blockquote class="blockquote">
+							<div class="owner-info">
+								<a href="#">用户名</a>
+								<span class="color-999">
+									<img src="imgs/mzvip3.jpg" alt=""> 魅族版主
+								</span>
+							</div>
+							引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，
+						</blockquote>
+						<div class="comment-detail-context has-blockquote">
+							<blockquote class="blockquote">
+								<div class="owner-info">
+									<a href="#">用户名</a>
+									<span class="color-999">
+										<img src="imgs/mzvip3.jpg" alt=""> 魅族版主
+									</span>
+								</div>
+								引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，
+							</blockquote>
+							<div class="comment-detail-context has-blockquote">
+								<blockquote class="blockquote">
+									<div class="owner-info">
+										<a href="#">用户名</a>
+										<span class="color-999">
+											<img src="imgs/mzvip3.jpg" alt=""> 魅族版主
+										</span>
+									</div>
+									引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，
+								</blockquote>
+								<div class="comment-detail-context">
+									<div>
+										评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容评论内容评论内容评论内容
+									</div>
+									<div class="sub-comment">
+										<a href="#" class="user-name inline-block" title="二级回复用户名">二级回复用户名</a>:
+										二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容
+										<div class="publish-time color-999 pull-right">
+											<span>2014年12月6日</span>									
+											<a href="#" class="color-999 comment-sub-comment">回复</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="option pull-right">
+							<a href="#" class="support">支持</a>
+							<a href="#" class="oppose">反对</a>
+							<a href="#" class="reply">回复</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="comment-list">
+				<div class="comment-detail">
+					<div class="user-avatar">
+						<a href="#" name="floor-4">
+							<img src="imgs/user_icon_1.jpg" alt="">
+						</a>
+					</div>
+					<div class="user-info">
+						<img src="imgs/user_icon_1.jpg" alt="">
+						<div class="info">
+							<p>
+								<a href="#" class="inline-block set-hide-user-name" title="用户名">username 明个人说明 username usernam eusernam </a>
+								<em class="honor inline-block"><img src="imgs/mzvip3.jpg"> 魅族版主</em>
+							</p>
+
+							<p>个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说明个人说个人说明个人说明个人说明个人说明</p>
+							<p>
+								帖子：<span class="topic-num">100</span>
+								收听：<span class="listen-num">200</span>
+								听众：<span class="listener-num">300</span>
+							</p>
+							<a href="#" class="pull-right">更多信息&gt;&gt;</a>
+						</div>
+					</div>
+					<div class="comment-detail-body">
+						<div class="comment-detail-head">
+							<div class="owner-info">
+								<a href="#" title="大大大大森" class="set-user-name">大大大大森</a>
+								<span><img src="imgs/mzvip3.jpg" alt=""> 魅友版主</span>
+								<span class="publish-time">2013年3月</span>
+								<span class="pull-right color-999">地板</span>
+							</div>							
+						</div>
+						<blockquote class="blockquote">
+							<div class="owner-info">
+								<a href="#">用户名</a>
+								<span class="color-999">
+									<img src="imgs/mzvip3.jpg" alt=""> 魅族版主
+								</span>
+							</div>
+							引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，
+						</blockquote>
+						<div class="comment-detail-context has-blockquote">
+							<blockquote class="blockquote">
+								<div class="owner-info">
+									<a href="#">用户名</a>
+									<span class="color-999">
+										<img src="imgs/mzvip3.jpg" alt=""> 魅族版主
+									</span>
+								</div>
+								引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，引用内容，
+							</blockquote>
+							<div class="comment-detail-context has-blockquote">
+								<div>
+									评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容评论内容评论内容评论内容
+								</div>
+								<div class="sub-comment">
+									<a href="#" class="user-name inline-block" title="二级回复用户名">二级回复用户名</a>:
+									二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容
+									<div class="publish-time color-999 pull-right">
+										<span>2014年12月6日</span>									
+										<a href="#" class="color-999 comment-sub-comment">回复</a>
+									</div>
+								</div>
+								<div class="sub-comment">
+									<a href="#" class="user-name inline-block" title="二级回复用户名">二级回复用户名</a>:
+									二级评论内容，
+									<div class="publish-time color-999 pull-right">
+										<span>2014年12月6日</span>									
+										<a href="#" class="color-999 comment-sub-comment">回复</a>
+									</div>
+								</div>
+								<div class="sub-comment">
+									<a href="#" class="user-name inline-block" title="二级回复用户名">二级回复用户名</a>:
+									二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容
+									<div class="publish-time color-999 pull-right">
+										<span>2014年12月6日</span>									
+										<a href="#" class="color-999 comment-sub-comment">回复</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="option pull-right">
+							<a href="#" class="support">支持</a>
+							<a href="#" class="oppose">反对</a>
+							<a href="#" class="reply">回复</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+
+			<!-- 分页 -->
+			<div id="page-list">
+				<span class="pre-page page-disable"><em class="pre"></em></span>
+				<ul class="page-num">
+					<li data-page-num="1" class="page-active">1</li>
+					<li data-page-num="2">2</li>
+					<li data-page-num="3">3</li>
+					<li data-page-num="4">4</li>
+					<li data-page-num="600" class="page-ignore"> ... 600</li>
+				</ul>
+				<span class="next-page"><em class="next"></em></span>
+			</div>
+			
+		</div>
+	</div>
+
+	<!-- 回到顶部 -->
+	<a id="scroll-top" href="#"></a>
+</body>
+<script src="js/jquery-1.11.3.js"></script>
+<script src="bootstrap/js/bootstrap.js"></script>
+<script src="js/public.js"></script>
+<script src="js/topic_detail_bootstrap.js"></script>
+</html>

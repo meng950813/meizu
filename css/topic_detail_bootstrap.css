@@ -1,0 +1,237 @@
+.topic-dir{
+	font-size: 0.8em;
+}
+
+.header-user-info,.option{
+	position: relative;
+	padding: 1em 0.5em;
+}
+
+.header-user-info .user-avatar img,.header-user-info .user-info>img{
+	width: 5em;
+	height: 5em;
+}
+.user-info{
+	width: 90%;
+	max-width: 500px;
+	top: 0;
+	left: 0;
+}
+.honor{
+	font-weight: normal;
+	color: #999;
+	font-style: normal;
+}
+
+
+.topic-detail-head{
+	margin-left: 5em;
+}
+.topic-detail-head > h3{
+	margin: 0;
+	padding: 5px 0 5px 15px;
+	font-size: 1.6em;
+}
+.topic-detail-head .owner-info,
+.topic-detail-head .owner-info > a,.publish-info{
+	font-size: 1em;
+	color: #32a5e7;
+}
+.topic-detail-head .share-btn{
+	display: inline-block;
+}
+.topic-detail-head .owner-info,.publish-info{
+	padding: 10px 0 10px 15px;	
+}
+.topic-detail-head .owner-info > a{
+	padding-right: 5px;
+}
+.publish-info{
+	color: #999;
+}
+.publish-info > span{
+	font-weight: normal;
+	margin-right: 1em;
+}
+
+/* 帖子内容 */
+.topic-detail-context{
+	line-height: 1.8em;
+	font-size: 1.2em;
+	word-spacing: 1.5em;
+}
+.topic-detail-context img{
+	max-width: 100%;
+	display: block;
+}
+/* 操作 */
+.support-btn,.oppose-btn,.reply-btn{
+	display: inline-block;
+	margin-left: 0.8em;
+	font-size: 1.2em;
+	padding: 0.5em 2em;
+	color: 	#999;
+	background: #f5f5f5;
+	border: 1px solid #e6e6e6;
+	border-radius: 5px;
+}
+.reply-btn{
+	background: #32a5e7;
+	border-color: #32a5e7;
+	color: #fff;
+}
+.support-btn:hover,.oppose-btn:hover{
+	color: #666;
+}
+.reply-btn:hover{
+	color: #fff;
+}
+
+/* 评论列表 */
+.comment-list-head{
+	font-size: 1.2em;
+}
+.total-comment-num{
+	font-size: 1.4em;
+	font-weight: bold;
+}
+.arrive-floor{
+	color: #999;
+	font-size: 0.8em;
+	line-height: 1.2em;
+}
+/* 楼层直达 */
+#to-floor{
+	width: 3em;
+	height: 1.5em;
+	background: #f9f9f9;
+	border: 1px solid #e6e7e9;
+	text-align: center;
+}
+
+/* 引用 */
+.blockquote{
+	font-size: 1em;
+	padding: 10px;
+	background: #f6f6ff;
+	border-color: #ddd;
+}
+.blockquote .owner-info{
+	padding: 5px;
+}
+.blockquote .owner-info > a{
+	color: #32a5e7;
+	padding: 0 5px;
+}
+
+/* 一条评论 */
+.has-blockquote{
+	padding-left: 0.5em;
+}
+.comment-list{
+	padding: 1em 0;
+	border-bottom: 1px solid #ddd;
+}
+.comment-detail{
+	position: relative;
+}
+.comment-detail-body{
+	margin-left: 3.4em;
+}
+.comment-detail-head{
+	color: #999;
+	padding-bottom: .8em;
+}
+.comment-detail .user-avatar img{
+	width: 3em;
+	height: 3em;
+}
+.comment-detail-context{
+	min-width: 50%;
+}
+.comment-detail .user-info,.comment-detail .user-info>a{
+	font-size: 0.8em;
+}
+.set-user-name,.set-hide-user-name{
+	font-size: 1em;
+	color: #32a5e7;
+	max-width: calc( 100% - 6.5em );
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.set-hide-user-name{
+	font-size: 1.2em;
+}
+
+/* 二级回复 */
+.sub-comment{
+	background: #f5f6f7;
+	padding: 0.8em; 
+	font-size: 0.9em;
+	margin: 5px 0;
+}
+.sub-title:after,
+.comment-list:before,.comment-list:after,
+.sub-comment:before,.sub-comment:after{
+	display: block;
+	content: "";
+	clear: both;
+}
+
+.sub-comment  .user-name{
+	vertical-align: middle;
+	color: #32a5e7;
+	font-weight: bold;
+	width: 8em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.publish-time > span{
+	margin: 0 10px; 
+}
+/* 操作 */
+.support,.oppose,.reply{
+	margin-left: 1.5em;
+	color: #999;
+}
+.support:hover,.oppose:hover,.reply:hover{
+	color: #333;
+}
+
+/* 右侧推荐内容 */
+.new-topic,.recommend-topic{
+	padding: 1em 0;
+}
+.new-topic-head,.recommend-title{
+	padding-bottom: 1em;
+	border-bottom: 1px solid #ddd;
+}
+.new-topic-head > a,.recommend-title{
+	color: #32a5e7;
+}
+.new-topic-head > a{
+	width: 10em;
+}
+.new-topic-head > a,.new-topic-list > li > a,
+.recommend-list > li > a{
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+.new-topic-list, .recommend-list{
+	list-style: none;
+	padding-left: 0; 
+}
+.new-topic-list > li, .recommend-list > li{
+	border-bottom: 1px solid #ddd;
+	padding: 0;
+}
+.new-topic-list > li > a, .recommend-list > li > a{
+	width: 100%;
+	line-height: 2em;
+}
+/* 右侧推荐内容结束 */
