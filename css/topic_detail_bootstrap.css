@@ -69,7 +69,7 @@
 	display: inline-block;
 	margin-left: 0.8em;
 	font-size: 1.2em;
-	padding: 0.5em 2em;
+	padding: 0.3em 1.5em;
 	color: 	#999;
 	background: #f5f5f5;
 	border: 1px solid #e6e6e6;
@@ -85,6 +85,11 @@
 }
 .reply-btn:hover{
 	color: #fff;
+}
+.share-btn{
+	display: block;
+	height: 2.5em;
+	line-height: 2.5em;
 }
 
 /* 评论列表 */
@@ -171,7 +176,7 @@
 	font-size: 0.9em;
 	margin: 5px 0;
 }
-.sub-title:after,
+.sub-title:after,.option:after,
 .comment-list:before,.comment-list:after,
 .sub-comment:before,.sub-comment:after{
 	display: block;
@@ -179,11 +184,11 @@
 	clear: both;
 }
 
-.sub-comment  .user-name{
+.user-name{
 	vertical-align: middle;
 	color: #32a5e7;
 	font-weight: bold;
-	width: 8em;
+	max-width: 8em;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -204,14 +209,12 @@
 .new-topic,.recommend-topic{
 	padding: 1em 0;
 }
-.new-topic-head,.recommend-title{
+.new-topic-head{
 	padding-bottom: 1em;
 	border-bottom: 1px solid #ddd;
 }
-.new-topic-head > a,.recommend-title{
-	color: #32a5e7;
-}
 .new-topic-head > a{
+	color: #32a5e7;
 	width: 10em;
 }
 .new-topic-head > a,.new-topic-list > li > a,
@@ -235,3 +238,9 @@
 	line-height: 2em;
 }
 /* 右侧推荐内容结束 */
+
+@media screen and (max-width: 767px) {
+	.option{
+		padding: 0.5em;
+	}
+}

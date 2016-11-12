@@ -1,28 +1,7 @@
-var validate = document.getElementById('validate');
-var vali_box = document.getElementById("vali-box");
-
-// 设置 验证码 canvas 的宽度
-function setCanvasWidth(){
-	// 获取input 宽度
-	var input_width = getComputedStyle(vali_box).width;
-	var input_height = getComputedStyle(vali_box).height;
-	
-	// 去掉 最后的 px ,转为整型
-	input_width = parseInt(input_width.slice(0, input_width.length-2));
-	input_height = parseInt(input_height.slice(0, input_height.length-2));
-
-	if (validate.width != input_width) {
-		// 设置 canvas 宽高与input宽高相同
-		validate.width = input_width;
-		validate.height = input_height;
-		return true;
-	}
-	return false;
-}
-setCanvasWidth();
+setCanvasWidth.init();
 
 window.onresize = function(){
-	if(setCanvasWidth()){
+	if(setCanvasWidth.setWidth()){
 		drawValidate.init(validate);
 	}
 	drawBg.setWidth();
@@ -36,12 +15,12 @@ $("#sub").on("click",function(event) {
 	
 	// 用户名为空   
 	if ($("#username").val() == '') {
-		showTips($("#username","用户名不能为空"));
+		showTips($("#username"),"用户名不能为空");
 		return;
 	}
 	// 用户名中有 特殊字符
 	else if( preventSql( $("#username").val() ) ){
-		showTips($("#username","用户名不能包含特殊字符"));
+		showTips($("#username"),"用户名不能包含特殊字符");
 		return;
 	}
 	else{
@@ -68,23 +47,27 @@ $("#sub").on("click",function(event) {
 
 	// TODO 异步提交表单
 	var loginInfo = $("#login-form").serialize();
-	$.ajax({
-		url: '/path/to/file',
-		type: 'post',
-		data: loginInfo,
-		success:function(result){
-			if ($result) {
-				// TODO
-				/* 设置七天内免登录 */
-			}
-			else{
-				showTips($("#username"),"用户名/密码错误");
-			}
-		},
-		error:function() {
-			showTips($("#username","服务器异常,请稍后重试"));			
-		}
-	});
+	// $.ajax({
+	// 	url: '/path/to/file',
+	// 	type: 'post',
+	// 	data: loginInfo,
+	// 	success:function(result){
+	// 		if ($result) {
+	// 			// TODO
+	// 			 设置七天内免登录 
+	// 		}
+	// 		else{
+	// 			showTips($("#username"),"用户名/密码错误");
+	// 		}
+	// 	},
+	// 	error:function() {
+	// 		showTips($("#username"),"服务器异常,请稍后重试");			
+	// 	}
+	// });
+
+	sessionStorage.setItem("userName",'123');
+
+	window.location.href = "index_bootstrap.html";
 });
 
 function showTips($target,tip){

@@ -1,169 +1,106 @@
-/* 设置显示搜索框 */
-$(".search-btn").click(function(event) {
-	$(".search-form-box").fadeIn('fast');
-	$(this).fadeOut(400);
-});
-$(".search-form-box .close").click(function(event) {
-	$(".search-form-box").fadeOut('fast');
-	$(".search-btn").fadeIn(400);
-});
-
-
-/* 测试数据 */
-var testSearchData = {
-	"topicResult":[
-		{
-			"topicId":1,"topicTitle":"搜索结果标题",
-			"topicContext":"具体内容具体内容具体内容具体内容具体内容具体内容具体内容具体内容",
-			"viewNum":120,
-			"commentNum":12
-		},
-		{
-			"topicId":2,"topicTitle":"搜索结果标题搜索结果标题",
-			"topicContext":"具体内容具体内容具体内容具体内容具体内容具体内容具体内容具体内容",
-			"viewNum":120,
-			"commentNum":12
-		},
-		{
-			"topicId":3,"topicTitle":"搜索结果标题搜索结果标题搜索结果标题",
-			"topicContext":"具体内容具体内容具体内容具体内容具体内容具体内容具体内容具体内容",
-			"viewNum":120,
-			"commentNum":12
-		},
-		{
-			"topicId":3,"topicTitle":"搜索结果标题搜索结果标题搜索结果标题搜索结果标题",
-			"topicContext":"具体内容具体内容具体内容具体内容具体内容具体内容具体内容具体内容",
-			"viewNum":120,
-			"commentNum":12
-		}
-	],
-	"userResult":[
-		{
-			"userId":1,"userName":"测试用户名","persign":"黑夜给了你黑色的眼睛，你却用它翻白眼",
-			"userIcon":"imgs/user_icon_1.jpg"
-		},
-		{
-			"userId":2,"userName":"测试数据","persign":"黑夜给了你黑色的眼睛，你却用它翻白眼",
-			"userIcon":"imgs/user_icon_2.jpg"
-		},
-		{
-			"userId":3,"userName":"测试用户名测试用户名测试用户名测试用户名测试用户名","persign":"黑夜给了你黑色的眼睛，你却用它翻白眼",
-			"userIcon":"imgs/user_icon_1.jpg"
-		},
-		{
-			"userId":4,"userName":"测试用户名","persign":"黑夜给了你黑色的眼睛，你却用它翻白眼",
-			"userIcon":"imgs/user_icon_2.jpg"
-		}
-	]
-};
-/* 获取搜索结果 */
-function setSearchResult(searchContext){
-	// 此处需要通过 ajax 获取值
-	// 假设此处返回值为 testSearchData
-	testSearchData = JSON.parse(JSON.stringify(testSearchData));
-
-	var showResult = "";
-	for(var i in testSearchData.topicResult){
-		var topicList = testSearchData.topicResult[i];
-		showResult += `
-			<div class="search-result-list">
-				<a href="#" class="search-result-topic">${topicList.topicTitle}</a>
-				<p class="discription">&nbsp;${topicList.topicContext}</p>
-				<div class="pull-left">
-					<span class="view-num"><i></i>${topicList.viewNum}</span>
-					<span class="comment-num"><i></i>${topicList.commentNum}</span>
-				</div>
-			</div>`;
-	}
-	for(var i in testSearchData.userResult){
-		var userList = testSearchData.userResult[i];
-		showResult += `
-			<div class="search-result-list">
-				<div class="user-icon">
-					<a href="#" >
-						<img src="${userList.userIcon}" alt="">
-					</a>
-				</div>
-				<div class="user-discription">
-					<a href="#" class="search-result-topic">${userList.userName}</a>
-					<p class="discription">${userList.persign}</p>
-				</div>
-			</div>`;
-	}
-
-	$("#search-result").html(showResult);
+/* 判断是否已登录，设置显示相应内容 */
+if(sessionStorage.getItem('userName')){
+	$("#header .not-signin").hide().siblings('.sign-in').css('display', 'inline-block');
 }
-setSearchResult();
+else{
+	$("#header .sign-in").hide().siblings('.not-signin').css('display', 'inline-block');
+}
 
+/* 设置头部搜索栏响应事件 */
+$("#header-search-form").submit(function(event) {
+	event.preventDefault();
+	var key = $(this).serialize();
+	window.open("search_result.html?"+key);
+});
 
-// 设置分页内容，参数依次为：当前页号，总页数，一行显示几页
-// 例如 pageCount = 5 => 显示：1 2 3 4 ...600  五个
-window.setTopicPage = function(newPage,totalPage,pageCount){
+var setPage = {
+	nowPage: 1, // 保存当前页号
+	totalPage: 1,// 保存总页数
+	pageCount: 7,// 一次显示的页数
 
-	// 如果只有一页,将上一页和下一页的按钮置为不可用状态
-	if(totalPage == 1){
-		$("#page-list span").addClass('page-disable');
-	}
-	// 否则将按钮全部置为可用状态
-	else{
-		$("#page-list span").removeClass('page-disable');
-	}
+	init : function(nowPage,totalPage){
+		this.nowPage = nowPage;
+		this.totalPage = totalPage;
 
-	// 填充分页列表内容
-	var pageContext = "";
-	var i = 1; // 计数用,表示已添加的页数：默认已将当前页算入其中
-	// 当前页之前 能显示的页数
-	var preCount = Math.ceil(pageCount/2);
-	
+		this.fillPage();
+	},
 
-	// 第一页和最后一页的状态较为特殊，所以需要专门添加 ==> 循环结束条件：
-	// 	要添加的 页号 为 1 或者 只能再添加 1 个 
-	while((newPage - i)>1 && (preCount > 1)){
-		pageContext = "<li data-page-num='"+(newPage-i)+"'>"+ (newPage-i) +"</li>"+ pageContext;
-		i++; preCount--;
-	}
+	// 填充分页数据
+	fillPage : function(){
+		// 只有一页，设置左右按钮不可用
+		if (this.totalPage == 1) {
+			$('#page-list span').addClass('page-disable').attr('disabled', true);
+		}
 
-	// 如果被选中页是第一页
-	if(newPage == 1){
-		pageContext = "<li data-page-num='"+newPage+"' class='page-active'>"+newPage+"</li>" + pageContext;	
-		$("#page-list>.pre-page").addClass('page-disable');
-	}
-	else{
-		// 表示被选中页到第一页之间的页可以全部显示
-		if( (newPage - i) == 1){
-			pageContext = "<li data-page-num='1'>1</li>" + pageContext;
+		// 用于保存分页数据
+		var pageContext = "";
+		var i = 1;
+		// 当前页之前 能显示的页数
+		var canAdd = Math.ceil(this.pageCount/2);
+
+		// 第一页和最后一页的状态较为特殊，所以需要专门添加 
+		// ==> 循环结束条件：
+		// 	要添加的 页号 为 1 或者 只能再添加 1 个 
+		while((this.nowPage - i)>1 && (canAdd > 1)){
+			pageContext = "<li data-page-num='"+(this.nowPage-i)+"'>"+ (this.nowPage-i) +"</li>"+ pageContext;
+			i++; canAdd--;
+		}
+
+		// 如果被选中页是第一页
+		if(this.nowPage == 1){
+			pageContext = "<li data-page-num='"+this.nowPage+"' class='page-active'>"+this.nowPage+"</li>" + pageContext;	
+			$("#page-list>.pre-page").addClass('page-disable').attr('disabled', true);
 		}
 		else{
-			pageContext = "<li data-page-num='1' class='page-ignore'>1 ...</li>" + pageContext;
+			// 表示被选中页到第一页之间的页可以全部显示
+			if( (this.nowPage - i) == 1){
+				pageContext = "<li data-page-num='1'>1</li>" + pageContext;
+			}
+			else{
+				pageContext = "<li data-page-num='1' class='page-ignore'>1 ...</li>" + pageContext;
+			}
+			// 防止出现当前页也是最后一页，重复设置
+			if(this.nowPage != this.totalPage){
+				pageContext += "<li data-page-num='"+this.nowPage+"' class='page-active'>"+this.nowPage+"</li>";
+				canAdd--;
+			}
+			$("#page-list>.pre-page").removeClass('page-disable').attr('disabled', false);
 		}
-		if(newPage != totalPage){
-			pageContext += "<li data-page-num='"+newPage+"' class='page-active'>"+newPage+"</li>";
-		}
-	}
+		canAdd--;
 
-	// 重置计数器
-	i = 1;
-	// 当前页之后能显示的页数
-	var nextCount = Math.floor(pageCount/2) + preCount;
-	while(totalPage > (newPage+i) && nextCount > 1 ){
-		pageContext += "<li data-page-num='"+(newPage+i)+"'>"+ (newPage+i) +"</li>";
-		i++;
-		nextCount--;
-	}
-	if(newPage == totalPage){
-		pageContext += "<li data-page-num='"+totalPage+"' class='page-active'>"+totalPage+"</li>";
-		$("#page-list>.next-page").addClass('page-disable');		
-	}
-	else{
-		if( (newPage + i) == totalPage ){
-			pageContext += "<li data-page-num='"+totalPage+"'>"+totalPage+"</li>";
+		// 重置计数器
+		i = 1;
+		// 当前页之后能显示的页数
+		canAdd += Math.floor(this.pageCount/2);
+		while(this.totalPage > (this.nowPage+i) && canAdd > 1 ){
+			pageContext += "<li data-page-num='"+(this.nowPage+i)+"'>"+ (this.nowPage+i) +"</li>";
+			i++;
+			canAdd--;
+		}
+		if(this.nowPage == this.totalPage){
+			pageContext += "<li data-page-num='"+this.totalPage+"' class='page-active'>"+this.totalPage+"</li>";
+			$("#page-list>.next-page").addClass('page-disable').attr('disabled', true);		
 		}
 		else{
-			pageContext += "<li data-page-num='"+totalPage+"' class='page-ignore'>... "+totalPage+"</li>";
+			if( (this.nowPage + i) == this.totalPage ){
+				pageContext += "<li data-page-num='"+this.totalPage+"'>"+this.totalPage+"</li>";
+			}
+			else{
+				pageContext += "<li data-page-num='"+this.totalPage+"' class='page-ignore'>... "+this.totalPage+"</li>";
+			}
+			$("#page-list>.next-page").removeClass('page-disable').attr('disabled', false);		
 		}
+
+		$("#page-list .page-num").html(pageContext);
+	},
+	getTotalPage : function(){
+		return this.totalPage;
+	},
+	getNowPage : function(){
+		return this.nowPage;
 	}
-	return pageContext;
 }
+
 
 window.formatTime = function(time){
 	var p_time = new Date(time);
@@ -256,7 +193,6 @@ $(".change-recommend").on('click', function(event) {
 	}.bind(this),2000);
 });
 
-	ctx : null, // canvas 对象
 /* 判断 文本内容，防止 sql 注入 */
 window.preventSql = function(context){
 	var reg = /^.*["',\\/*].*$/ig;
@@ -317,7 +253,7 @@ var drawValidate = {
 
 		for(var i = 0; i < this.count ; i++){
 			// 设置字体及大小
-			this.ctx.font = this.getRN(18,48)+"px Arial";
+			this.ctx.font = this.getRN(this.height/3,this.height)+"px Arial";
 			var char = this.dataPool[this.getRN(0,this.dataPool.length)];
 			this.result += char;
 
@@ -334,11 +270,111 @@ var drawValidate = {
 			this.ctx.strokeStyle = this.getRC(90,200);
 			this.ctx.moveTo(this.getRN(0,this.width),this.getRN(0,this.height));
 			this.ctx.lineTo(this.getRN(0,this.width),this.getRN(0,this.height));
+			
+			this.ctx.moveTo(this.getRN(0,this.width),this.getRN(0,this.height));
+			this.ctx.lineTo(this.getRN(0,this.width),this.getRN(0,this.height));
+			
 			this.ctx.closePath();
 			this.ctx.stroke();
 		}
 	},
 	getValidate : function(){
 		return  this.result;
+	}
+}
+
+/*设置 验证码 canvas 的宽度*/
+var setCanvasWidth = {
+	validate : null, // canvasId
+	vali_box : null, // 验证码输入框 id
+
+	input_height : 0,
+	input_width : 0,
+
+	init : function(){
+		this.validate = document.getElementById("validate");
+		this.vali_box = document.getElementById("vali-box");
+		
+		this.setWidth();
+		
+	},
+	setWidth : function(){
+		// 获取input 宽度
+		this.input_width = getComputedStyle(this.vali_box).width;
+		this.input_height = getComputedStyle(this.vali_box).height;
+		
+		// 去掉 最后的 px ,转为整型
+		this.input_width = parseInt(this.input_width.slice(0, this.input_width.length-2));
+		this.input_height = parseInt(this.input_height.slice(0, this.input_height.length-2));
+		
+		if (this.validate.width != this.input_width || this.input_height != this.validate.height) {
+			// 设置 canvas 宽高与input宽高相同
+			this.validate.width = this.input_width;
+			this.validate.height = this.input_height;
+			return true;
+		}
+		return false;
+	}
+}
+
+/* 设置富文本编辑器对象 */
+var setEditor = {
+	editor : null, // 编辑器对象
+
+	init : function(){
+		// 创建编辑器对象
+		this.editor = new wangEditor("reply-area");
+
+		// 配置编辑器
+		this.editorConfig();
+		// 启动编辑器
+		this.editor.create();
+
+		// 设置编辑器是否可用
+		this.setStatus();
+	},
+
+	// 配置编辑器
+	editorConfig : function(){
+		// 配置上传路径
+    this.editor.config.uploadImgUrl = 'server/uploadImg.php';
+    // 配置编码方式
+    this.editor.config.uploadHeaders = {'Accept' : 'text/x-json'};
+		// 配置上传图片名
+		this.editor.config.uploadImgFileName = 'uploadImg';
+
+		// 配置编辑器功能
+		// 小屏功能
+		var sreenWidth = document.body.clientWidth;
+		if( sreenWidth < 500 ){
+			this.editor.config.menus = ['quote','link','unlink','undo','redo'];
+		}
+		else if( sreenWidth < 768 ){
+			this.editor.config.menus = ['quote','link','unlink','emotion','img','insertcode','undo','redo'];
+		}
+		// pc 机大屏功能
+		else{
+			this.editor.config.menus = ['source','bold','forecolor','bgcolor','quote','fontfamily','fontsize','unorderlist','orderlist','link','unlink','table','emotion','img','insertcode','undo','redo'];
+		}
+	},
+
+	// 设置编辑器是否可用
+	setStatus : function(){
+		// 已登录，编辑器可用
+		if(sessionStorage.getItem("userName")){
+			this.editor.enable();
+			$("#reply-area-box>.login-tip").hide();
+			$("#sub-reply").attr('disabled', false);
+		}
+		else{
+			this.editor.disable();
+			$("#reply-area-box .login-tip").show();
+			$("#sub-reply").attr('disabled', true);
+		}
+	},
+
+	// 返回编辑器对象
+	getEditor : function(){
+		return this.editor;
 	}
 }

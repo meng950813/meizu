@@ -7,29 +7,47 @@
 h3{
 	margin: 0;
 }
+.clear{
+	display: block;
+	content: "";
+	clear: both;
+}
 
+/* 显示一行，超过的省略 */ 
+.show-one-line{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;	
+}
+/* 显示两行，超过的省略 */ 
+.show-two-line{
+	display: -webkit-box;
+	-webkit-box-orient:vertical;
+	-webkit-line-clamp:2;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 
 // 轮播图显示文字
 .carousel-caption>span{
-	font-size: 1.2em;
+	font-size: 1em;
 }
 
 /* 社区热帖 */
 .hot-topic-head{
 	padding-bottom: 10px;
-}
-.hot-topic-head h3{
-	display: inline-block;
-}
-.hot-topic-head h5{
-	display: inline-block;
-	float: right;
-	font-size: 1em;
+	h3{
+		display: inline-block;
+	}
+	h5{
+		float: right;
+		font-size: 1em;
+	}
 }
 #today-topic,#member{
 	font-weight: bold;
 	font-size: 1.2em;
-	color: #337ab7;
+	color: #32a5e7;
 }
 
 
@@ -37,45 +55,51 @@ h3{
 .topic-context{
 	margin-left: 3.2rem;
 	line-height: 24px;
-}
-.topic-context>a{
-	display: block;
-	font-size: 1em;
-  color: #333;
-  overflow: hidden;
-  width: 95%;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+	>a{
+		font-size: 1em;
+	  color: #333;
+	  // width: 95%;
+	  .show-two-line;
+	}
 }
 .topic-context>p>span,.view-num>i,.comment-num>i{
-	display: inline-block;
-	margin-right: 1em;
 	font-size: 1em;
+	margin-right: 0.8em;
+	display: inline-block;
 	vertical-align: top;
 }
 
 .username{
-	width: 6em;
-	margin-right: 1em;
+	max-width: 9.5em;
+	margin-right: 0.8em;
 	color: #999;
-	overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+	.show-one-line;
 }
 
 /* 精选图文topic  */
-.featured-topic .row{
-	padding: 10px 0;
-}
-.featured-topic img{
-	width: 100%;
-}
-.featured-topic-content{
-	padding: 0;
+.featured-topic {
+	.row{
+		padding: 10px 0;
+	}
+	.featured-topic-content{
+		padding: 0;
+	}
+	img{
+		width: 100%;
+	}
 }
 .featured-topic-title{
-	font-size: 1.2em;
+	padding-left: 5px;
+	font-size: 1.1em;
 	font-weight: bold;
+}
+.featured-topic-title,.topic-sub-title{
+	width: 100%;
+	.show-two-line;
+}
+.topic-sub-title{
+	padding-left: 5px;
+	font-size: 1.5rem;
 }
 
 .topic-tag{
@@ -83,27 +107,105 @@ h3{
 }
 .topic-info{
 	text-align: right;
-	font-size: 1em;
+	font-size: 1.2rem;
 	padding: 5px 0;
-}
-.topic-info>span,.topic-info>.publisher{
-	margin-right: 5px;
-}
-.topic-info>.publisher{
-	color: #999;
+	>span,>.publisher{
+		margin-right: 5px;
+	}
+	>.publisher{
+		max-width: 8em;
+		display: inline-block;
+		vertical-align: middle;
+		color: #999;
+		.show-one-line;
+	}
 }
 .read-all{
 	color: #31A5E7;
 }
 .share-weibo{
-	display: inline-block;
 	width: 28px;
   height: 22px;
+  margin-left: 5px; 
   background: url(../imgs/main_icon.gif) no-repeat -60px -630px;
+	display: inline-block;
   vertical-align: middle;
 }
 .share-weibo:hover{
 	opacity: .5;
+}
+
+/* 右侧部分 */
+// 热门板块
+#hot-area{
+	list-style: none;
+	padding: 0;
+	border-left: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+	>li{
+		float: left;
+		width: 50%;
+		border-bottom: 1px solid #ddd;
+		border-right: 1px solid #ddd;
+		>a{
+			display: inline-block;
+			width: 100%;
+			height: 2.5em;
+			line-height: 2.5em;
+			padding: 0 1em 0 0.5em;
+			.show-one-line;
+		}
+	}
+	>li:nth-child(4n),>li:nth-child(4n+1){
+		background: #f8f8ff;
+	}
+	&:after{
+		.clear;
+	}
+}
+// 最新活动
+#newest-action{
+	dl{
+		margin: 10px 0;
+		dt,dd{
+			display: inline-block;
+			vertical-align: top;
+		}
+		dt{
+			width: 45%;
+			img{
+				max-width: 100%;
+				max-height: 100%;
+			}
+		}
+		dd{
+			margin-left: 1%;
+			width: 52%;
+			h4,.action-sub-title{
+				display: block;
+				width: 100%;
+			}
+			h4{
+				margin: 0 0 10px 0;
+				font-size: 1em;
+				font-weight: bold;
+				.show-one-line;
+			}
+			.action-sub-title{
+				margin: 0 0 5px 0;
+				font-size: 0.8em;
+				font-weight: 400;
+				.show-two-line;
+			}
+			a{
+				font-size: 1em;
+				color: #32a5e7;
+			}
+		}
+		&:after{
+			.clear;
+		}
+	}
 }
 
 /* footer */
@@ -113,14 +215,14 @@ h3{
 	margin-top: 10px;
 	border-top: 1px solid #ddd;
 	text-align: center;
-}
-#footer-box>a{
-	margin-right: 10px;
+	>a{
+		margin-right: 10px;
+	}
 }
 
 .lang-list {
 	display: inline-block;
-}
-.lang-list > .dropdown-menu{
-	bottom: 20px;
+	> .dropdown-menu{
+		bottom: 20px;
+	}
 }

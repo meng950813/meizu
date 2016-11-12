@@ -1,11 +1,15 @@
 /* 公用样式 */
 body{
 	padding-top: 50px;
-	font-family: "microsoft Yahei",Helvetica,Arial,sans-serif
+	font-family: "Microsoft Yahei",Helvetica,Arial,sans-serif
+}
+ul,ol,dl{
+	list-style: none;
 }
 
 .left-part,.right-part{
 	padding: 1.2em;
+	margin-top: 1.2em;
 	background: #fff;
 	border: 1px solid #e6e6e6;
 }
@@ -13,15 +17,13 @@ body{
 	width: 70%;
 	float: left;
 	vertical-align: top;
-	margin-top: 1.2em;
 }
 .left-part > .container,.right-part > .container{
 	width: 100%;
 	padding: 0;
 }
 .right-part{
-	width: calc(29% - 20px);
-	margin: 1.2em 0 0 1.2em;
+	width: 28%;
 	float: right;
 }
 
@@ -39,9 +41,11 @@ body{
 	color: #999;
 }
 
-.dropdown-menu{
-	left: -2em;
-	min-width: 8em;
+.header-search-form:after,#menu:before,#reply-option-area:after,
+.recommend-list:before,.recommend-list:after{
+	display: block;
+	content: "";
+	clear: both;
 }
 .cursor-pointer{
 	cursor: pointer;
@@ -51,11 +55,14 @@ body{
 /* 导航栏 */
 .not-signin,.sign-in{
 	height: 50px;
-	line-height: 20px;
-	padding: 15px 1em;
+	line-height: 50px;
 	font-size: 1.2em;
 	display: inline-block;
 	vertical-align: top;
+	position: relative;
+}
+.not-signin,.sign-in .user-avatar{
+	padding: 0 1em;
 }
 .not-signin > a{
 	color: #666;
@@ -66,9 +73,43 @@ body{
 .not-signin > span{
 	padding: 0 10px;
 }
+
 .sign-in{
 	display: none;
 }
+.sign-in .user-avatar{
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+.sign-in .user-avatar img{
+	width: 2em;
+	height: 2em;
+}
+.option-list{
+	position: absolute;
+	padding: 0;
+	top: 50px;
+	right: 0;
+	left: -3em;
+	height: 0;
+	overflow: hidden;
+	transition: height 0.3s linear;
+	background: #fff;
+}
+.option-list a{
+	display: block;
+	margin: 10px;
+}
+.user-avatar:hover{
+	background: #fff;
+	border-color: #e8e8e8;
+}
+.user-avatar:hover  .option-list{
+	border: 1px solid #e8e8e8;
+	border-top: none;
+	height: 144px;
+}
+
 #menu{padding: 0;}
 #menu>ul{
   list-style: none;
@@ -91,81 +132,34 @@ body{
 	border-bottom-left-radius: 20px;
 	border-bottom-right-radius: 20px; 
 }
-/* 导航栏结束 */
-
-/* 搜索表单样式 */
 .search-btn{
 	cursor: pointer;
 	font-size: 1.6em;
 	line-height: 50px;
 }
-.search-form-box{
-	position: absolute;
-	top: 50px;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	padding: 1.5em 0;
-	background: rgba(255, 255, 255, 0.85);
-	z-index: 9999;
-	display: none;
-}
-.search-form-box .container{
-	position: relative;
-}
-.search-form-box .close{
-	opacity: 0.5;
-	font-size: 4em;
-	position: absolute;
-	top: -20px;
-	right: 0;
-}
-.search-form-box .close:hover{
-	opacity: 1;
-}
-#search-form{
-	font-size: 1.5em;
-}
-#search-form>input{
-	border: none;
-	border-bottom: 1px solid #ddd;
-	height: 40px;
-	line-height: 40px;
-	box-shadow: none;
-}
-#search-result,#search-result .search-result-list{
-	padding: 5px 0;
-}
-#menu:before,.search-result-list:before,.search-result-list:after{
-	display: block;
-	content: "";
-	clear: both;
-}
-.search-result-list .inline-block{
+/* 导航栏 */
+.header-search-form{
+	display: inline-block;
 	vertical-align: middle;
 }
-.search-result-topic{
-	display: block;
-	color: #000;
-	font-size: 1.2em;
-	font-weight: 600;
-	padding: 5px 0;
+.header-search-form>input,.header-search-form>button{
+	height: 36px;
+	line-height: 36px;
+	margin-top: 7px;
+	padding: 0 1em;
+	float: left;
+	border: 1px solid #32a5e7;
 }
-#search-result .discription{
-	margin: 0;
-	font-size: 1em;
-	color: #333;
-	display: -webkit-box;
-	-webkit-box-orient:vertical;
-	-webkit-line-clamp:2;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	word-spacing: 1.5em;
+.header-search-form>input{
+	border-right: none;
 }
- .user-discription{
-	margin-left: 4.5rem;
-} 
-/* 搜索表单样式结束 */
+.header-search-form>button{
+	background: #32a5e7;
+	color: #fff;
+	border-left: none;
+}
+
+/* 导航栏结束 */
 
 /* 社区热帖的用户头像 */
 .user-avatar,.user-icon{
@@ -179,14 +173,13 @@ body{
 }
 .view-num,.comment-num{
 	margin-right: 5px;
-	font-weight: bold;
 	color: #000;
 }
 .view-num>i,.comment-num>i{
-	display: inline-block;
 	width: 1.2em;
 	height: 1.5em;
 	margin-right: 2px;
+	display: inline-block;
 	vertical-align: middle;
 }
 .view-num>i{
@@ -244,12 +237,11 @@ body{
 /* 分页样式 */
 /* 帖子分页 */
 #page-list {
-  padding: 1.4em 0;
+  padding: 1em 0;
   line-height: 2em;
 }
 #page-list span,
 #page-list li {
-  display: inline-block;
   width: 2em;
   height: 2em;
   color: #333;
@@ -260,6 +252,7 @@ body{
   border-radius: 1em;
   text-align: center;
   cursor: pointer;
+  display: inline-block;
   vertical-align: top;
 }
 #page-list .page-num {
@@ -268,25 +261,24 @@ body{
   vertical-align: top;
 }
 #page-list em {
-  width: 10px;
-  height: 17px;
+  width: 100%;
+  height: 100%;
   display: inline-block;
-  vertical-align: middle;
 }
 #page-list .pre-page {
   margin-left: 0;
 }
 #page-list .pre {
-  background: url(../imgs/main_icon.gif) no-repeat -124px -568px;
+  background: url(../imgs/main_icon.gif) no-repeat -118px -564px;
 }
 #page-list .next {
-  background: url(../imgs/main_icon.gif) no-repeat -152px -568px;
+  background: url(../imgs/main_icon.gif) no-repeat -144px -564px;
 }
 #page-list > .page-disable > .pre {
-  background-position: -182px -568px;
+  background-position: -176px -564px;
 }
 #page-list > .page-disable > .next {
-  background-position: -210px -568px;
+  background-position: -202px -564px;
 }
 #page-list .page-active {
   background-color: #32a5e7;
@@ -297,6 +289,58 @@ body{
   width: 3em;
 }
 /* 分页样式结束 */
+
+/* 富文本编辑器样式 */
+#reply-area-box{
+	position: relative;
+	min-height: 300px;
+	padding-bottom: 1.5em;
+}
+
+.login-tip{
+	position: absolute;
+	z-index: 999;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	text-align: center;
+	display: none;
+}
+.login-tip>span{
+	height: 100%;
+	width: 0;
+	display: inline-block;
+	vertical-align: middle;
+}
+.login-tip>p{
+	display: inline-block;
+	font-size: 1.2em;
+}
+.login-tip>p>a{
+	margin: 0 5px;
+	color: #32a5e7;
+	font-weight: bold;
+}
+
+#reply-area{
+	height: 100%;
+	min-height: 300px;
+}
+/* 回复按钮区域 */
+#reply-option-area{
+	position: relative;
+}
+#reply-option-area label{
+	font-weight: normal;
+}
+#sub-reply{
+	position: absolute;
+	right: 0;
+	top: -0.4em;
+}
+/* 富文本编辑器样式结束 */
+
 
 /* 右侧推荐内容 */
 #signin-expand{
@@ -338,8 +382,9 @@ body{
 .recommend-title{
 	font-size: 2rem;
 	font-weight: bold;
-	padding: 5px 0;
+	padding: 10px 0;
 	border-bottom: 1px solid #ddd;
+	color: #32a5e7;
 }
 .change-recommend{
 	float: right;
@@ -354,11 +399,6 @@ body{
 .recommend-list{
 	padding: 10px 0;
 	position: relative;
-}
-.recommend-list:before,.recommend-list:after{
-	display: block;
-	content: "";
-	clear: both;
 }
 
 .recommend-username > a{
@@ -391,6 +431,9 @@ body{
 	background-position: 
 }
 
+
+
+
 @media screen and (min-width: 992px) {
 	body{
 		font-size: 16px;
@@ -402,7 +445,12 @@ body{
 	.type-list{
 		font-size: 1.2em;
 	}
-	
+	.in-big-screen{
+		display: inline-block;
+	}
+	.in-small-screen{
+		display: none;
+	}
 }
 @media screen and (max-width: 991px){
 	body{
@@ -416,14 +464,32 @@ body{
 		padding: 0.5em;
 	}
 	.container{
-		padding: 0.5em;
+		padding: 0 0.5em;
 	}
 	.col-xs-12,.col-xs-10{
 		padding: 0;
+	}
+	.in-big-screen{
+		display: inline-block;
+	}
+	.in-small-screen{
+		display: none;
 	}
 }
 @media screen and (max-width: 767px) {
 	body{
 		font-size: 12px;
+	}
+	#reply-area-box{
+		min-height: 200px;
+	}
+	#reply-area{
+		min-height: 150px;
+	}
+	.in-big-screen{
+		display: none;
+	}
+	.in-small-screen{
+		display: inline-block;
 	}
 }

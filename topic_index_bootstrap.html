@@ -50,7 +50,7 @@
 
 
 	<!-- 导航栏 -->
-	<div class="navbar navbar-default navbar-fixed-top">
+	<div id="header" class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="header">
 				<!-- logo -->
@@ -62,18 +62,29 @@
 					<span class="icon-bar"></span>
 				</a>
 				<div class="nav-tip pull-right">
-					<span class="glyphicon glyphicon-search search-btn"></span>
 					
 					<div class="not-signin">
 						<a href="login_bootstrap.html">登录</a>
 						<span>|</span>
 						<a href="register_bootstrap.html">注册</a>
 					</div>
+					
+					<a href="search_result.html" target="_blank" class="search-btn in-small-screen">
+						<span class="glyphicon glyphicon-search"></span>
+					</a>
+					<form action="#" class="in-big-screen header-search-form" id="header-search-form">
+						<input type="text" name="key" placeholder="搜一搜" required="required">
+						<button type="submit"><span class="glyphicon glyphicon-search"></span></button>
+					</form>
+					
 					<div class="sign-in">
 						<div class="user-avatar">
-							<a href="#">
-								<img src="imgs/user_icon_1.jpg" alt="">
-							</a>
+							<img src="imgs/user_icon_1.jpg" alt="">
+							<div class="option-list">
+								<a href="#" class="btn btn-success">我的地盘</a>
+								<a href="publish_topic.html" class="publish-topic btn btn-info">发帖</a>
+								<a href="#" class="btn btn-danger">注销</a>
+							</div>
 						</div>
 					</div>
 
@@ -81,49 +92,6 @@
 			</div>
 		</div>
 	</div>
-		
-
-	<!-- 搜索栏 -->
-	<div class="search-form-box">
-		<div class="container">
-			<span class="close">&times;</span>
-			<div class="row">
-				<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
-					<form id="search-form" class="has-feedback">
-						<input type="text" placeholder="请输入搜索内容" class="form-control" name="search-text">
-						<span class="glyphicon glyphicon-search form-control-feedback" id="search"></span>
-					</form>
-				</div>
-				<div class="row">
-					<div id="search-result" class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
-						<!-- 帖子列表 -->
-						<div class="search-result-list">
-								<a href="#" class="search-result-topic">搜索内容搜索内容搜索内容搜索内容搜索内容搜索内容</a>
-								<p class="discription">&nbsp;文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述文章描述</p>							
-							<div class="pull-left">
-								<span class="view-num"><i></i>123</span>
-								<span class="comment-num"><i></i>321</span>
-							</div>
-						</div>
-						<!-- 用户列表 -->
-						<div class="search-result-list">
-							<div class="user-icon">
-								<a href="#" class="">
-									<img src="imgs/user_icon_1.jpg" alt="">
-								</a>
-							</div>
-							<div class="user-discription">
-								<a href="#" class="search-result-topic">用户名</a>
-								<p class="discription">个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-	</div>
-	
 
 	<!-- 内容部分 -->
 	<div class="container">
@@ -213,7 +181,7 @@
 					<li data-page-num="600" class="page-ignore"> ... 600</li>
 				</ul>
 				<span class="next-page"><em class="next"></em></span>
-				<a href="#" class="btn btn-info pull-right">发帖</a>
+				<a href="publish_topic.html" class="btn btn-info pull-right">发帖</a>
 			</div>
 		</div>
 	</div>
@@ -241,7 +209,6 @@
 				</div>
 
 				<!-- 推荐的人 -->
-				<div class="recommend">
 					<div class="recommend-title">
 						推荐的人
 						<span class="change-recommend">
@@ -249,6 +216,7 @@
 						</span>
 					</div>
 					
+				<div class="recommend">
 					<div class="recommend-list">
 						<div class="inline-block user-avatar">
 							<a href="#">

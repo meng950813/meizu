@@ -1,9 +1,9 @@
 // 测试数据
 var test_json = {
 	// 总页数
-	"totalPageNum":30,
+	"totalPage":30,
 	// 当前页数
-	"newPage":10,
+	"nowPage":1,
 	"topicList":[
 		{
 			"topicId":1,
@@ -85,81 +85,129 @@ if (!sessionStorage.orderBy) {
 	sessionStorage['orderBy'] = 5;
 }
 
-/* 获取并填充数据 */
-function setTopicInfo(orderBy,newPage){
-	/* 此处应用 ajax 获取数据 */	
-	// console.dir(testData);
-	var topicContext = "";
-	for(var index in testData.topicList){
-		var topic = testData.topicList[index];
-		// console.log(topic);
-		var publishTime = formatTime(topic.publishTime);
-		topicContext += `
-			<div class='col-xs-12 col'>
-				<div class='row'>
-					<div class='user-avatar'>
-						<a href='#'>
-							<img src='${topic.userInfo.userIcon}' alt='${topic.userInfo.userName}'>
-						</a>
-					</div>
-					<div class='user-info'>
-						<img src='${topic.userInfo.userIcon}' alt='${topic.userInfo.userName}'>
-						<div class='info'>
-							<a href='#'>${topic.userInfo.userName}</a>
-							<p>${topic.userInfo.persign}</p>
-							<p>
-								帖子：<span class='topic-num'>${topic.userInfo.topicNum}</span>
-								收听：<span class='listen-num'>${topic.userInfo.focusNum}</span>
-								听众：<span class='listener-num'>${topic.userInfo.listenerNum}</span>
-							</p>
-							<button class='listen-he'>收听他</button>
+var topic_index = {
+	orderBy: 5, // 排序方式，默认5,表示最新回复
+	
+	nowPage: 1, // 当前页
+	totalPage: 10, // 全部页
+
+	init : function(){
+		// 设置默认排序方式
+		if (!sessionStorage.orderBy) {
+			sessionStorage['orderBy'] = this.orderBy;
+		}
+		else{
+			this.orderBy = sessionStorage.getItem('orderBy');
+		}
+
+		this.getData();
+		this.setEvent();
+	},
+
+	// 从服务器端获取数据
+	getData : function(){
+		// 发起异步请求 。。。 
+		
+		// 填充数据 
+		this.fillData();
+
+		// 设置分页
+		// this.nowPage = parseInt(testData.nowPage);
+		// this.totalPage = parseInt(testData.totalPage);
+
+		setPage.init(this.nowPage,this.totalPage);
+	},
+
+	// 填充数据
+	fillData : function(){
+		var topicContext = "";
+		for(var index in testData.topicList){
+			var topic = testData.topicList[index];
+			// console.log(topic);
+			var publishTime = formatTime(topic.publishTime);
+			topicContext += `
+				<div class='col-xs-12 col'>
+					<div class='row'>
+						<div class='user-avatar'>
+							<a href='#'>
+								<img src='${topic.userInfo.userIcon}' alt='${topic.userInfo.userName}'>
+							</a>
 						</div>
-					</div>
-					<div class='col-xs-10 col-sm-11'>
-						<a href='topic_detail_bootstrap.html' class='color-black'>${topic.topicContext}</a>
-					</div>
-					<div class='pull-right publish-info'>
-						<span class='view-num'><i></i>${topic.viewNum}</span>
-						<span class='comment-num'><i></i>${topic.commentNum}</span>
-						<a href='#' class='username'>${topic.userInfo.userName}</a>
-						<span class='publish-time'>${publishTime}</span>
-					</div>
+						<div class='user-info'>
+							<img src='${topic.userInfo.userIcon}' alt='${topic.userInfo.userName}'>
+							<div class='info'>
+								<a href='#'>${topic.userInfo.userName}</a>
+								<p>${topic.userInfo.persign}</p>
+								<p>
+									帖子：<span class='topic-num'>${topic.userInfo.topicNum}</span>
+									收听：<span class='listen-num'>${topic.userInfo.focusNum}</span>
+									听众：<span class='listener-num'>${topic.userInfo.listenerNum}</span>
+								</p>
+								<button class='listen-he'>收听他</button>
+							</div>
+						</div>
+						<div class='col-xs-10 col-sm-11'>
+							<a href='topic_detail_bootstrap.html' class='color-black'>${topic.topicContext}</a>
+						</div>
+						<div class='pull-right publish-info'>
+							<span class='view-num'><i></i>${topic.viewNum}</span>
+							<span class='comment-num'><i></i>${topic.commentNum}</span>
+							<a href='#' class='username'>${topic.userInfo.userName}</a>
+							<span class='publish-time'>${publishTime}</span>
+						</div>
 
-				</div>
-			</div>`;
+					</div>
+				</div>`;
+		}
+
+		$("#topic-list").html(topicContext);
+	},
+
+	setEvent : function(){
+		/* 设置修改排序方式事件 */
+		$(".topic-type-list,#order-type-list").on('click', 'a', function(event) {
+			event.preventDefault();
+			var $target = $(event.target);
+
+			// 重置排序方式
+			if(this.orderBy != $target.data('orderby')){
+				$target.parent("li").addClass('active').siblings().removeClass('active');
+				this.orderBy = $target.data('orderby');
+				sessionStorage.setItem("orderBy",this.orderBy);
+
+				this.getData();
+			}
+		}.bind(this));
+
+		/* 设置换页点击事件: 点击数字换页 */
+		$("#page-list").on('click', '.page-num > li', function(event) {
+			var $target = $(event.target);
+
+			if( !$target.hasClass('page-active') ){
+				$target.addClass('page-active').siblings('.page-active').removeClass('page-active');
+				this.nowPage = $target.data('page-num');
+				this.getData();
+			}
+		}.bind(this));
+
+		/* 设置换页点击事件: 点击左右换页 */
+		$("#page-list").on('click', 'span>em', function(event) {
+			var $target = $(event.target).parent("span");
+			
+			// 表示允许点击
+			if(	!$target.hasClass("page-disable")){
+				// 前一页
+				if( $target.hasClass('pre-page') && this.nowPage > 1){
+					this.nowPage--;
+					this.getData();
+				}
+				else if( $target.hasClass('next-page') && this.nowPage < this.totalPage){
+					this.nowPage++;
+					this.getData();
+				}
+			}
+		}.bind(this));
 	}
-
-	$("#topic-list").html(topicContext);
-
-	$("#page-list>.page-num").html(setTopicPage(newPage,testData.totalPageNum,5));
 }
-setTopicInfo(sessionStorage.orderBy,1);
 
-
-/* 设置换页点击事件: 点击数字换页 */
-$("#page-list").on('click', '.page-num > li', function(event) {
-	if($(this).attr('class') != "page-active"){
-		$(this).addClass('page-active').siblings('.page-active').removeClass('page-active');
-		var pageNum = $(this).data('page-num');
-		console.log(pageNum);
-		setTopicInfo(sessionStorage.orderBy,pageNum);
-	}
-});
-
-/* 设置换页点击事件: 点击左右换页 */
-$("#page-list").on('click', '.pre-page,.next-page', function(event) {
-	// 表示允许点击
-	if($(this).attr('class').indexOf("page-disable") == -1){
-		// 防止手动修改 类点击的情况
-		var activePage = $(this).siblings('.page-num').children('.page-active').data("page-num");
-		var totalPage = $(this).siblings('.page-num').children().last().data('page-num');
-
-		// 前一页
-		if($(this).attr('class') == "pre-page" && activePage > 1){
-			setTopicInfo(sessionStorage.orderBy,--activePage);
-		}
-		else if($(this).attr('class') == "next-page" && activePage < totalPage){
-			setTopicInfo(sessionStorage.orderBy,++activePage);
-		}
-	}
-});
+topic_index.init();

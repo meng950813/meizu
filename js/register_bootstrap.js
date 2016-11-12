@@ -46,7 +46,7 @@ var register = {
 	checkName : function(){
 		var username = $("#username").val();
 		// TODO　允许输入中文
-		var name_reg = new RegExp("^[a-zA-Z0-9_]{4,16}$");
+		var name_reg = new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5]{4,16}$");
 		if(name_reg.test(username)){
 			// TODO  ajax 请求 。。。
 			

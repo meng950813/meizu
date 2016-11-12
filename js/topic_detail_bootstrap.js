@@ -94,3 +94,95 @@ function toFloor(){
 function setCommentInfo(pageNum){
 
 }
+
+/* 初始化富文本编辑器 */
+setEditor.init();
+
+/* 发送编辑内容 */
+var sendContext = {
+	submitBtn : null,
+	content : null , // 提交内容
+
+	init : function(){
+		this.submitBtn = $("#sub-reply");
+
+		// 设置监听事件
+		this.submitBtn.on('click', function(event) {
+			event.preventDefault();
+
+			var editor = setEditor.getEditor();
+			// 获取编辑器中的内容
+			this.content = editor.$txt.html();
+
+			// 只有当页面内容中有文字或有图时才能提交
+			if(this.content.trim().indexOf("<img") != -1 || editor.$txt.text().trim()!=""){
+				// 格式化 sql 关键字
+				this.checekContent();
+				
+				/* TODO 发送异步请求 */
+				$.ajax({
+					url: '/path/to/file',
+					type: 'default GET (Other values: POST)',
+					dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+					data: {param1: 'value1'},
+				})
+				.done(function(result) {
+					console.log("success");
+					/* 回帖后跳转到最后一页 */
+					if($("#to-last-page").prop('checked')){
+						// 判断当前页是否是最后一页
+						
+					}
+				})
+				.fail(function() {
+					console.log("error");
+				})
+				.always(function() {
+					console.log("complete");
+				});
+				
+
+				console.log(this.content);
+			}
+		}.bind(this));
+	},
+
+	// 刷新当前页
+	flashPage : function(){
+
+	},
+
+	// 检查发布内容，处理其中出现的sql关键字，防止简单的sql注入
+	checekContent : function(){
+		console.log("checekContent");
+		this.content = this.content.replace("/\"\b*(drop)\b/ig","&quot;drop&nbsp;").trim();
+		this.content = this.content.replace("/\"\b*(select)\b/ig","&quot;select&nbsp;");
+		this.content = this.content.replace("/\"\b*(delete)\b/ig","&quot;delete&nbsp;");
+		this.content = this.content.replace("/\"\b*(update)\b/ig","&quot;update&nbsp;");
+	}
+}
+sendContext.init();
+
+
+/* 设置回复响应事件 */
+$(".comment-list").on('click', ".option .reply-comment,.sub-comment .reply-sub-comment" ,function(event) {
+	event.preventDefault();
+	/* 回复一级评论 */
+	var $target;
+	if($(this).hasClass('reply-comment')){
+		$target = $(this).parent().siblings('.comment-detail-head').children('.owner-info').children('.set-user-name');
+	}
+	/* 回复二级评论 */
+	else if($(this).hasClass('reply-sub-comment')){
+		$target = $(this).parent().siblings('.user-name:first');
+	}
+	var targetContent = "<span disabled='disabled'>回复 <a href='"+$target.attr('href')+"' class='user-name inline-block' title='"+$target.html()+"'>"+$target.html()+"&nbsp;</a>：</span>";
+	$('#reply-topic-id').val($(this).parent().data('topic-id'));
+	$('#reply-area').html(targetContent);
+	window.location.href="#reply-area";
+});
+
+$(".reply-topic").on('click', function(event) {
+	// event.preventDefault();
+	$("#reply-topic-id").val($(this).data('topic-id')).siblings('#reply-area').html("");
+});
