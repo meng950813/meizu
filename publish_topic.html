@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>发帖页</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="bootstrap/less/bootstrap.css">
+	<link rel="stylesheet" href="css/public_bootstrap.css">
+	<link rel="stylesheet" href="dist/css/wangEditor.min.css">
+	<style>
+		#publish-form{
+			margin-top: 1em;
+			padding: 1em;
+			background: #fff;
+			border: 1px solid #ddd;
+		}
+
+		#vali-box,#topic-title{
+			padding: 0 1em;
+			height: 2.5em;
+			line-height: 2.5em;
+			box-sizing: border-box;
+		}
+		#topic-title{
+			width: 100%;
+			margin: 1em 0;
+		}
+		#vali-box{
+			float: left;
+			width: 120px;
+		}
+
+		#sub-reply{
+			background: #32a5e7;
+	    color: #fff;
+	    border: 1px solid #ddd;
+	    border-radius: 5px;
+	    padding: 0.5em 1.5em;
+	    top: 0;
+		}
+		@media screen and (max-width: 400px) {
+			#sub-reply{
+				position: static;
+				display: block;
+				width: 100%;
+			}
+		}
+	</style>
+</head>
+<body>
+	<!-- 顶部 -->
+	<div id="header" class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="header">
+				<!-- logo -->
+				<a href="index_bootstrap.html" class="navbar-brand">Logo</a>
+	
+				<a href="#menu" class="navbar-toggle" data-toggle="collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<div class="nav-tip pull-right">
+					
+					<div class="not-signin">
+						<a href="login_bootstrap.html">登录</a>
+						<span>|</span>
+						<a href="register_bootstrap.html">注册</a>
+					</div>
+					
+					<a href="search_result.html" target="_blank" class="search-btn in-small-screen">
+						<span class="glyphicon glyphicon-search"></span>
+					</a>
+					<form action="#" class="in-big-screen header-search-form" id="header-search-form">
+						<input type="text" name="key" placeholder="搜一搜" required="required">
+						<button type="submit"><span class="glyphicon glyphicon-search"></span></button>
+					</form>
+					
+					<div class="sign-in">
+						<div class="user-avatar">
+							<img src="imgs/user_icon_1.jpg" alt="">
+							<div class="option-list">
+								<a href="#" class="btn btn-success">我的地盘</a>
+								<a href="publish_topic.html" class="publish-topic btn btn-info">发帖</a>
+								<a href="#" class="btn btn-danger">注销</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<!-- 导航栏 -->
+		<div id="menu" class="navbar-collapse collapse">
+			<ul>
+				<li><a href="index_bootstrap.html">首页</a></li>
+				<li><a href="topic_index_bootstrap.html" class="active">综合讨论</a></li>
+				<li><a href="#">魅蓝手机</a></li>
+				<li><a href="#">摄影天地</a></li>
+				<li><a href="#">全部版块</a></li><li><a href="#">摄影天地</a></li>
+				<li><a href="#">全部版块</a></li><li><a href="#">摄影天地</a></li>
+				<li><a href="#">全部版块</a></li>
+			</ul>
+		</div>
+
+		<!-- 富文本编辑器盒子 -->
+		<form action="a.php" id="publish-form" method="post">
+
+			<dic class="title-box">
+				<input type="text" maxlength="80" name="topic_title" id="topic-title" placeholder="帖子标题">
+			</dic>
+
+			<div id="reply-area-box">
+				<div id="reply-area" name="topic_content"></div>
+			</div>
+
+			<div id="reply-option-area">
+				<input type="text" id="vali-box" placeholder="验证码">
+				<canvas id="validate" height="48" width="175"></canvas>				
+				<input type="submit" id="sub-reply" value="发表帖子">
+			</div>			
+		</form>
+	</div>
+</body>
+<script src="js/jquery-1.11.3.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="js/public.js"></script>
+<script type="text/javascript" src="dist/js/wangEditor.min.js"></script>
+<script>
+
+	var editor = new wangEditor("reply-area");
+
+	// 配置上传路径
+  editor.config.uploadImgUrl = 'server/uploadImg.php';
+  // 配置编码方式
+  editor.config.uploadHeaders = {'Accept' : 'text/x-json'};
+	// 配置上传图片名
+	editor.config.uploadImgFileName = 'uploadImg';
+
+	editor.config.menus = ['bold','forecolor','bgcolor','quote','fontfamily','fontsize','unorderlist','orderlist','link','unlink','table','emotion','img','video','insertcode','undo','redo'];
+
+
+	editor.create();
+
+	setCanvasWidth.init();
+
+	window.onresize = function(){
+		if(setCanvasWidth.setWidth()){
+			drawValidate.init(validate);
+		}
+	}
+	// 绘制验证码
+	drawValidate.init(validate);
+
+	$("#publish-form").submit(function(event) {
+		/* Act on the event */
+		console.log(111);
+		// return false;
+		console.log(222);
+	});
+</script>
+</html>

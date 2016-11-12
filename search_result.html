@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>搜索页</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="bootstrap/less/bootstrap.css">
+	<link rel="stylesheet" href="css/public_bootstrap.css">
+	<link rel="stylesheet" href="css/search_page.css">
+</head>
+<body>
+	<!-- 导航栏 -->
+	<div id="header" class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="header">
+				<!-- logo -->
+				<a href="index_bootstrap.html" class="navbar-brand">Logo</a>
+	
+				<div class="nav-tip pull-right">					
+					<div class="not-signin">
+						<a href="login_bootstrap.html">登录</a>
+						<span>|</span>
+						<a href="register_bootstrap.html">注册</a>
+					</div>
+					<div class="sign-in">
+						<div class="user-avatar">
+							<img src="imgs/user_icon_1.jpg" alt="">
+							<div class="option-list">
+								<a href="#" class="btn btn-success">我的地盘</a>
+								<a href="publish_topic.html" class="publish-topic btn btn-info">发帖</a>
+								<a href="#" class="btn btn-danger">注销</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="search-form-box">
+			<div id="search-form">
+				<div id="searchNav">
+					<!-- <span data-type="0">招贴</span>
+					<span data-type="1">找人</span> -->
+				</div>
+
+				<form id="search-area" method="get" action="server/testSearch.php">
+					<input type="text" name="key" id="search-input" placeholder="请输入搜索内容">
+					<button type="submit" id="search-btn"><span class="glyphicon glyphicon-search"></span></button>
+				</form>
+				<div id="hot-search-tags">
+					<a href="javascript:void(0)" class="tag" data-key="tag1">tag1</a>
+					<a href="javascript:void(0)" class="tag" data-key="tag1tag1">tag1tag1</a>
+					<a href="javascript:void(0)" class="tag" data-key="tag1tag1tag1">tag1tag1tag1</a>
+					<a href="javascript:void(0)" class="tag" data-key="tag1tag1tag1tag1">tag1tag1tag1tag1</a>
+					<a href="javascript:void(0)" class="tag" data-key="tag1tag1tag1tag1tag1">tag1tag1tag1tag1tag1</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="search-form-box search-result-box">
+			<div class="search-tip">
+				<div class="search-result">结果：找到  “<span id="search-content">搜索内容</span>”  相关内容<span id="result-num">1</span>个
+					<select id="order-type">
+						<option value="0">发布时间</option>
+						<option value="1">点赞数</option>
+						<option value="2">评论数</option>
+					</select>
+
+				</div>
+			</div>
+			
+			<div class="search-result-list">
+				
+				<div class="list-row">
+					<a href="#" class="topic-title" target="_blank">帖子标题</a>
+					<div class="discription">&nbsp;帖子副标题，最多显示两行，超出部分省略</div>							
+					<div class="pull-left">
+						<span><a href="#" class="topic-module" target="_blank">某某版块</a></span>
+						<span><a href="#" class="topic-author" target="_blank">作者</a></span>
+						<span class="view-num"><i></i>123</span>
+						<span class="comment-num"><i></i>321</span>
+						<span class="publish-time">2016-08-01 11:12:13</span>
+					</div>
+				</div>
+				
+				<div class="list-row">
+					<div class="user-icon">
+						<a href="#" target="_blank">
+							<img src="imgs/user_icon_1.jpg" alt="">
+						</a>
+					</div>
+					<div class="user-discription">
+						<a href="#" target="_blank" class="topic-title">用户名</a>
+						<span class="user-tag">用户等级，例如:老油条</span>
+						<p class="discription">&nbsp;用户个性签名，最多显示两行，超出部分省略</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- 分页 -->
+			<div id="page-list">
+				<span class="pre-page page-disable"><em class="pre"></em></span>
+				<ul class="page-num">
+					<li data-page-num="1" class="page-active">1</li>
+					<li data-page-num="2">2</li>
+					<li data-page-num="3">3</li>
+					<li data-page-num="4">4</li>
+					<li data-page-num="600" class="page-ignore"> ... 600</li>
+				</ul>
+				<span class="next-page"><em class="next"></em></span>
+			</div>
+			
+		</div>
+
+	</div>
+	<script src="js/jquery-1.11.3.js"></script>
+	<script src="js/public.js"></script>
+	<script src="js/search_page.js"></script>
+</body>
+</html>

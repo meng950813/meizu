@@ -1,0 +1,185 @@
+html{
+	font-size: 16px;
+}
+body,div,canvas,nav,footer,form,input{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body{margin-top: 50px;}
+
+/* 公用样式 */
+.clear{
+	display: block;
+	content: "";
+	clear: both;
+}
+.inline-middle{
+	display: inline-block;
+	vertical-align: middle;
+}
+/* 显示一行，超过的省略 */ 
+.show-one-line{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;	
+}
+/* 显示两行，超过的省略 */ 
+.show-two-line{
+	display: -webkit-box;
+	-webkit-box-orient:vertical;
+	-webkit-line-clamp:2;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+/* 公用样式结束 */
+
+.search-form-box{
+	margin: 1rem auto 0;
+	padding: 1rem;
+	background: #fff;
+	border: 1px solid #ddd;
+}
+
+#search-form{
+	width: 80%;
+	margin: 0 auto;
+}
+#search-area,#search-form,#hot-search-tags{
+	&:after{
+		.clear;
+	}
+}
+//搜索栏和搜索按钮
+#search-input,#search-btn{
+	float: left;
+	font-size: 1rem;
+	height: 2.5rem;
+	line-height: 2.5rem;
+  border: 1px solid #1788e8;
+}
+#search-input{
+  width: 85%;
+  color: #7e7e7e;
+  padding: 0.7rem 1rem;
+  border-right: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background: #fafafa;
+}
+#search-btn{
+	width: 15%;
+	border-left: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+	background: #32a5e7;
+	span{
+		color: #fff;
+		font-size: 1.2rem;
+	}	
+}
+// 热门搜索
+#hot-search-tags{
+	.tag{
+		color: #fff;
+		float: left;
+		padding: 0.3rem 0.6rem;
+		margin: 0.5rem 0.8rem 0 0;
+		font-size: 0.8rem;
+		border-radius: 5px;
+		background: #c7c7c7;
+		&:hover{
+			background: #919191;
+		}
+	}
+}
+
+// 搜索结果
+// 
+.search-result-box{
+	display: none;
+}
+.search-tip{
+	height: 2.5rem;
+	line-height: 2.5rem;
+	border-bottom: 1px solid #ebebeb;
+}
+#order-type{
+	float: right;
+	height: 2rem;
+	margin-top: 0.25rem;
+	.inline-middle;
+}
+
+// 结果列表
+.list-row{
+	padding: 0.5rem 1rem;
+	border-bottom: 1px solid #ebebeb;
+	border-top: 1px solid #fafafa;
+	.topic-title{
+		color: #515151;
+		font-size: 1.2rem;
+		padding: 0.4rem 0;
+		.inline-middle;
+		&:hover{
+			color: #000;
+		}
+	}
+	.user-discription{
+		direction: inline-block;
+		margin-left: 4.5rem;
+
+	}
+	.user-tag{
+		color: #7e7e7e;
+		padding-left: 1rem;
+		.inline-middle;
+	}
+	.discription{
+		color: #7e7e7e;
+		.show-two-line;
+	}
+	.pull-left{
+		float: left;
+		width: 100%;
+		span{
+			padding: 0 0.5rem;
+			.inline-middle;
+		}
+	}
+	.topic-module,.topic-author{
+		padding-right: 0.5rem;
+		color: #32a5e7;
+	}
+	&:after{.clear;}
+
+}
+
+@media screen and (min-width:769px) {
+	.search-form-box{
+		width: 80%;
+		margin: 1.4rem auto 0;
+	}
+	.list-row{
+		padding: 0.5rem 1rem;
+	}
+}
+@media screen and (max-width:768px) and (min-width: 500px){
+	html{
+		font-size: 14px;
+	}
+}
+@media screen and (max-width: 499px) {
+	html{
+		font-size: 12px;
+	}
+	.search-form-box{
+		padding: 1rem 0.4rem;
+	}
+	#search-form{
+		width: 100%;
+	}
+	.list-row{
+		padding: 0.5rem;
+	}
+}
