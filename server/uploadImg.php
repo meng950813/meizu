@@ -1,8 +1,6 @@
 <?php
 	header("Content-Type:application/json");
 
-	// var_dump($_FILES);
-
 	$file = $_FILES['uploadImg'];
 
 	$uploadDir = "uploads/".date("Y-m-d");

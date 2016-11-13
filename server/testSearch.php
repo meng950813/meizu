@@ -36,10 +36,11 @@
 	else{
 		$sql .= " order by(publish_time desc)";
 	}
-	// $output['sql'] = $sql;
+	
 	$output['nowPage'] = $_GET['nowPage'];
 	$output['totalPage'] = 20;
 	$output['pageCount'] = 20;
 	$output['data'] = array("sql"=>$sql);
+
 	echo json_encode($output);
 ?>
