@@ -147,7 +147,7 @@ var topic_index = {
 							</div>
 						</div>
 						<div class='col-xs-10 col-sm-11'>
-							<a href='topic_detail_bootstrap.html' class='color-black'>${topic.topicContext}</a>
+							<a href='topic_detail.html' class='color-black'>${topic.topicContext}</a>
 						</div>
 						<div class='pull-right publish-info'>
 							<span class='view-num'><i></i>${topic.viewNum}</span>
