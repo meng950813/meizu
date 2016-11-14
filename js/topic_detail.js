@@ -176,7 +176,7 @@ $(".comment-list").on('click', ".option .reply-comment,.sub-comment .reply-sub-c
 	else if($(this).hasClass('reply-sub-comment')){
 		$target = $(this).parent().siblings('.user-name:first');
 	}
-	var targetContent = "<span disabled='disabled'>回复 <a href='"+$target.attr('href')+"' class='user-name inline-block' title='"+$target.html()+"'>"+$target.html()+"&nbsp;</a>：</span>";
+	var targetContent = "<span class='reply-block'>回复 <a href='"+$target.attr('href')+"' class='user-name inline-block' title='"+$target.html()+"'>"+$target.html()+"&nbsp;</a></span><span>:</span>";
 	$('#reply-topic-id').val($(this).parent().data('topic-id'));
 	$('#reply-area').html(targetContent);
 	window.location.href="#reply-area";

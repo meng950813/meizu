@@ -1,9 +1,24 @@
+
 /* 判断是否已登录，设置显示相应内容 */
 if(sessionStorage.getItem('userName')){
 	$("#header .not-signin").hide().siblings('.sign-in').css('display', 'inline-block');
 }
 else{
-	$("#header .sign-in").hide().siblings('.not-signin').css('display', 'inline-block');
+	/* 判断是否记住登录 */
+	if(localStorage.getItem('userName')){
+		// 判断是否超过7天
+		if( (new Date().getTime() - localStorage.getItem('loginTime') < (7 * 24 * 3600*1000))){
+			// 没超过7天，本地记录有效
+			sessionStorage.setItem("userName",localStorage.getItem('userName'));
+			$("#header .not-signin").hide().siblings('.sign-in').css('display', 'inline-block');
+		}
+		else{
+			localStorage.removeItem("userName");
+		}
+	}
+	else{
+		$("#header .sign-in").hide().siblings('.not-signin').css('display', 'inline-block');
+	}
 }
 
 /* 设置头部搜索栏响应事件 */
