@@ -9,6 +9,11 @@ window.onresize = function(){
 // 绘制验证码
 drawValidate.init(validate);
 
+/* 如果上次是记住密码，设置当前页面默认选中记住密码 */
+if(localStorage.getItem("loginTime")){
+	$("#remember").prop('checked', true);
+}
+
 /* 提交 */
 $("#sub").on("click",function(event) {
 	event.preventDefault();
@@ -47,27 +52,39 @@ $("#sub").on("click",function(event) {
 
 	// TODO 异步提交表单
 	var loginInfo = $("#login-form").serialize();
-	// $.ajax({
-	// 	url: '/path/to/file',
-	// 	type: 'post',
-	// 	data: loginInfo,
-	// 	success:function(result){
-	// 		if ($result) {
-	// 			// TODO
-	// 			 设置七天内免登录 
-	// 		}
-	// 		else{
-	// 			showTips($("#username"),"用户名/密码错误");
-	// 		}
-	// 	},
-	// 	error:function() {
-	// 		showTips($("#username"),"服务器异常,请稍后重试");			
-	// 	}
-	// });
+	$.ajax({
+		url: 'server/login.php',
+		type: 'post',
+		data: loginInfo,
+		success:function(result){
+			// 登录成功
+			if (result.status == "ok") {
+				// 选中记住密码
+				if($("#remember").prop('checked')){
+					localStorage.setItem("userName",result.username);
+					localStorage.setItem("uid",result.uid);
+					localStorage.setItem("loginTime",new Date().getTime());
+				}
+				// 没有选中记住密码，销毁 localStorage 中的 loginTime
+				else{
+					if(localStorage.getItem("loginTime")){
+						localStorage.removeItem("loginTime");
+					}
+				}
+				sessionStorage.setItem("userName",result.username);
+				sessionStorage.setItem("uid",result.uid);
+				
+				window.location.href = "index.html";
+			}
+			else{
+				showTips($("#username"),"用户名/密码错误");
+			}
+		},
+		error:function() {
+			showTips($("#username"),"服务器异常,请稍后重试");			
+		}
+	});
 
-	sessionStorage.setItem("userName",'123');
-
-	window.location.href = "index_bootstrap.html";
 });
 
 function showTips($target,tip){

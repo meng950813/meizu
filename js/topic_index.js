@@ -155,7 +155,6 @@ var topic_index = {
 							<a href='#' class='username'>${topic.userInfo.userName}</a>
 							<span class='publish-time'>${publishTime}</span>
 						</div>
-
 					</div>
 				</div>`;
 		}
