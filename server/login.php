@@ -6,7 +6,7 @@
 	$pwd = $_POST['password'];
 
 	$conn = linkDB();
-	$sql = "select uid,pwd from user where username = '$username'";
+	$sql = "select uid,password from user where username = '$username'";
 
 	$result = mysqli_query($conn,$sql);
 
@@ -14,18 +14,14 @@
 	// 查询成功，比较结果
 	if($row){
 		// 正确匹配，成功登录
-		if(md5($pwd) == $row['pwd']){
-			$output = array(
-				"status"		=>	"ok",
-				"uid"				=>	$row['uid'],
-				"username" 	=>	$username
-			);
+		if(md5($pwd) == $row['password']){
+			$output ['status'] = "ok" ;
+			$output ['uid'] = $row['uid'];
+			$output ['username'] = $username;
 			echo json_encode($output);
 			return;
 		}
 	}
-	$output = array(
-		"status"		=>	"error"
-	);
+	$output['status'] = "error";
 	echo json_encode($output);
 ?>

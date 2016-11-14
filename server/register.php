@@ -8,18 +8,19 @@
 	$email = $_POST['email'];
 
 	$conn = linkDB();
+	if (!empty($username)) {
+		$sql = "insert into user(uid,username,password,phone,email) values(NULL,'$username','$pwd','$phone','$email')";
 
-	$sql = "insert into user(username,pwd,phone,email) values('$username','$pwd','$phone','$email')";
+		$result = mysqli_query($conn,$sql);
 
-	$result = mysqli_query($conn,$sql);
-
-	if($result){
-		$output['status'] = "ok";
-		$output['uid'] = mysql_insert_id($result);
-		$output['username'] = $username;
+		if($result){
+			$output['status'] = "ok";
+			$output['uid'] = mysqli_insert_id($conn);
+			$output['username'] = $username;
+		}
+		else{
+			$output['status'] = "error";
+		}
+		echo json_encode($output);
 	}
-	else{
-		$output['status'] = "error";
-	}
-	echo json_encode($output);
 ?>
