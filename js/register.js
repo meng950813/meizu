@@ -9,13 +9,16 @@ var register = {
 
 		// 设置用户名，密码框的 focus 事件
 		$("#pwd,#pwd-show,#username").focus(function(event) {
-			if($(this).siblings('.tips').css('opacity') == 0){
-				$(this).siblings('.tips-show').show();
+			if($(event.target).siblings('.tips').css('opacity') == 0){
+				$(event.target).siblings('.tips-show').show();
 			}
 		})
 		.blur(function(event) {
-			$(this).siblings('.tips-show').hide();
-		});
+			$(event.target).siblings('.tips-show').hide();
+			if($(event.target).attr('id') == "username" && $(event.target).val() != ""){
+				this.nameIsExist($(event.target).val());
+			}
+		}.bind(this));
 
 		// 设置查看密码的响应事件
 		this.seePwd();
@@ -64,21 +67,50 @@ var register = {
 	/* 检测用户名是否符合标准 */
 	checkName : function(){
 		var username = $("#username").val();
-		// TODO　允许输入中文
+		// 允许输入中文
 		var name_reg = new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5]{4,16}$");
 		if(name_reg.test(username)){
-			// TODO  ajax 请求 。。。
-			
-			// 如果当前有红色警告
-			if (this.badName) {
-				this.hideTips($("#username"));
-				this.badName = false;
-			}
+			// 判断当前用户名是否已存在，如果已存在返回false
+			if(!this.nameIsExist(username)){
+				// 表示当前用户名符合标准
+				// 如果当前有红色警告
+				if (this.badName) {
+					this.hideTips($("#username"));
+					this.badName = false;
+				}
+			}			
 		}
 		else{
 			this.badName = true;
-			this.showTips($("#username"),"用户名不符合标准:4-16位字符，支持数字,字母,下划线");
+			this.showTips($("#username"),"用户名不符合标准:4-16位字符");
 		}
+	},
+
+	// 判断当前用户名是否已存在
+	nameIsExist : function(name){
+		$.ajax({
+			url: 'server/checkName.php',
+			type: 'get',
+			data: {username: name},
+			success : function(result){
+				// 用户名不存在
+				if(result == 1){
+					this.hideTips($("#username"));
+					return true;
+				}
+				// 用户名已存在
+				else{
+					this.showTips($('#username'),"用户名已存在");
+					return false;
+				}
+			}.bind(this)
+
+			// // 访问数据库错误
+			// error : function(){
+			// 	this.showTips($("#username"),"服务器连接失败，请稍后再试");
+			// 	return false;
+			// }.bind(this)
+		});
 	},
 
 	// 判断密码是否符合标准
