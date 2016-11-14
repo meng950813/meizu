@@ -55,6 +55,7 @@ $("#sub").on("click",function(event) {
 	$.ajax({
 		url: 'server/login.php',
 		type: 'post',
+		dataType: "json",
 		data: loginInfo,
 		success:function(result){
 			// 登录成功

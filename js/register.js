@@ -37,8 +37,27 @@ var register = {
 			if(this.badEmail){return;}
 
 			// 没有问题，异步提交
-			// TODO
-			// 
+			var info = $("#login-form").serialize();
+			$.ajax({
+				url: 'server/register.php',
+				type: 'post',
+				dataType: 'json',
+				data: info,
+				success : function(result){
+					console.log(result,result.status);
+					if(result.status == "ok"){
+						// 默认不记住密码
+						sessionStorage.setItem("uid",result.uid);	
+						sessionStorage.setItem("userName",result.username);
+					}
+					else{
+						this.showTips($("#username"),"服务忙，请稍后再试");
+					}
+				}.bind(this),
+				error : function(){
+					this.showTips($("#username"),"服务忙，请稍后再试");
+				}.bind(this)
+			});
 		}.bind(this));
 	},
 
@@ -58,7 +77,7 @@ var register = {
 		}
 		else{
 			this.badName = true;
-			this.showTips($("#username"),"用户名不符合标准");
+			this.showTips($("#username"),"用户名不符合标准:4-16位字符，支持数字,字母,下划线");
 		}
 	},
 
