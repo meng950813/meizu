@@ -52,9 +52,10 @@ var register = {
 						// 默认不记住密码
 						sessionStorage.setItem("uid",result.uid);	
 						sessionStorage.setItem("userName",result.username);
+						window.location.href = "index.html";
 					}
 					else{
-						this.showTips($("#username"),"服务忙，请稍后再试");
+						this.showTips($("#username"),"注册失败，请重新填写");
 					}
 				}.bind(this),
 				error : function(){
@@ -78,7 +79,10 @@ var register = {
 					this.hideTips($("#username"));
 					this.badName = false;
 				}
-			}			
+			}
+			else{
+				this.badName = true;
+			}	
 		}
 		else{
 			this.badName = true;

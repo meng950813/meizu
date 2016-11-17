@@ -1,4 +1,3 @@
-
 /* 判断是否已登录，设置显示相应内容 */
 if(sessionStorage.getItem('userName')){
 	$("#header .not-signin").hide().siblings('.sign-in').css('display', 'inline-block');
@@ -133,11 +132,8 @@ window.formatTime = function(time){
 	else if(differ < (60*60*24) ){
 		return Math.floor(differ / 3600)+"小时前";
 	}
-	else if(differ < (60*60*24*30) ){
+	else if(differ < (60*60*24*15) ){
 		return Math.floor(differ / (60*60*24))+"天前";
-	}
-	else if(differ < (60*60*24*30*12) ){
-		return Math.floor(differ / (60*60*24*30))+"月前";
 	}
 	else{
 		return p_time.getFullYear()+"年"+(p_time.getMonth()+1)+"月"+(p_time.getDate())+"日";
@@ -393,3 +389,53 @@ var setEditor = {
 		return this.editor;
 	}
 }
+
+
+
+
+
+
+
+
+/* 测试数据 */
+/*var testComment = [
+	"context":{
+		"topicInfo":{
+			"topicId":2,
+			"title":"做个好版主还是坏版主？",
+			"publishTime":"2016/11/2 16:23:56",
+			"viewNum":321,
+			"commentNum":123,
+			"context":"	啦啦啦德玛西亚<br>&nbsp;啦啦啦德玛西亚<br>啦啦啦德玛西亚<br><img src='imgs/banner_1.jpg' alt=''>啦啦啦啦啦德玛西亚<br><img src='imgs/user_icon_1.jpg' alt='>啦啦啦啦啦德玛西亚<br><img src='imgs/banner_5.jpg' alt='>啦啦啦德玛西亚<br>"
+		},
+		"userInfo":{
+			"userId":3,
+			"userName":"啦啦啦德玛西亚",
+			"userLevel":"吃瓜群众",
+			"userIcon":"imgs/user_icon_1.jpg",
+			"persign":"黑夜给了你黑色的眼睛，你却用它翻白眼",
+			// 用户头像
+			"userIcon":"imgs/user_icon_1.jpg",
+			// 发帖数
+			"topicNum":123,
+			// 关注数
+			"focusNum":234,
+			"listenerNum":120
+		}
+	},
+	"commit":{
+		"totalCommentNum":456,
+		"totalPageNum":45,
+		"nowPage":1,
+	}
+];
+var testSubComment = [{
+	
+	"commentList":[{
+		{
+			"topicId":3,
+			"context":"评论内容，评论内容",
+			// ""
+		},
+	}]
+}];*/

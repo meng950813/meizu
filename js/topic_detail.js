@@ -53,11 +53,11 @@ var testSubComment = [{
 }];*/
 
 /* 楼层直达 的点击事件和键盘事件 */
-$("#to-floor-btn").click(toFloor);
+$("#to-floor-btn").click(topic_detail.toFloor);
 /* 键盘事件 */
 $("#to-floor").keyup(function(event) {
 	if(event.keyCode === 13){
-		toFloor();
+		topic_detail.toFloor();
 	}
 });
 
@@ -90,10 +90,6 @@ function toFloor(){
 	$("#to-floor").val("");
 }
 
-/* 获取评论内容 并填充到页面上*/
-function setCommentInfo(pageNum){
-
-}
 
 /* 初始化富文本编辑器 */
 setEditor.init();
@@ -186,3 +182,104 @@ $(".reply-topic").on('click', function(event) {
 	// event.preventDefault();
 	$("#reply-topic-id").val($(this).data('topic-id')).siblings('#reply-area').html("");
 });
+
+var topic_detail = {
+	nowPage : 1, // 当前页号
+	totalPage : 1, // 总页数
+	listNum : 40, // 一页的数据量
+
+	topic_id : null, // 帖子 id 
+
+	init : function(){
+		// 获取帖子id
+		var search = location.search;
+		var start = search.indexOf("tp_id");
+		var end = search.indexOf("&",start);
+		// 只取值，tp_id=  占6字符
+		this.topic_id = parseInt(search.slice(start+6, end));
+
+		this.getData();
+
+	},
+
+	// 获取数据
+	getData : function(){
+		// 发起异步请求，获取数据
+		$.ajax({
+			url: 'server/topic_detail.php',
+			type: 'post',
+			dataType: 'json',
+			data: {'topic_id':topicId,'nowPage':this.nowPage},
+		})
+		.done(function(result) {
+			console.log("success");
+
+			// 填充数据
+			this.fillData(result);
+			// 设置分页
+			setPage.init(this.nowPage,this.totalPage);
+		}.bind(this))
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+		
+	},
+
+	// 填充数据
+	fillData : function(result){
+		// 第一页，有帖子内容
+		if(result.context){
+
+		}
+		// 如果有评论内容
+		if(result.comment.totalPage){
+			// 设置页数
+			this.totalPage = result.comment.totalPage;
+			this.nowPage = resutl.comment.nowPage;
+			
+			
+		}
+	},
+
+	setFloor : function(floorNum){
+		switch(floorNum){
+			case '1':
+				return "沙发";
+			case '1':
+				return "板凳";
+			case '2':
+				return "凉席";
+			case '3':
+				return "地板";
+			default:
+				return (floorNum+1)+"楼";
+		}
+	},
+
+	// 设置楼层跳转事件
+	toFloor : function(){
+		var floor = parseInt($("#to-floor").val());
+		// 输入框不为空、为数字 且 在规定范围 [1,max]
+		// 每40条数据分为一页
+		if( !isNaN(floor)&& floor > 0 && floor != this.nowPage){
+
+			// 超出楼层数量的跳转设为最后一楼
+			( floor > this.totalPage ) && ( floor = this.totalPage );
+
+			// 判断楼层跳转是否需要换页
+			// 需要跳转 的楼层 不在本页内
+			if( ((this.nowPage - 1)*this.listNum) > floor || floor < (this.nowPage * this.listNum) ){
+
+				// 跳转楼层所在的页数
+				var pageNum = Math.ceil(floor/this.listNum);
+				setCommentInfo(pageNum);
+			}
+			
+			window.location.href="#floor-"+floor;
+		}
+		$("#to-floor").val("");
+	}
+};
