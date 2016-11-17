@@ -44,6 +44,8 @@ var setPage = {
 		// 只有一页，设置左右按钮不可用
 		if (this.totalPage == 1) {
 			$('#page-list span').addClass('page-disable').attr('disabled', true);
+			$("#page-list .page-num").html("<li data-page-num='1' class='page-active'>1</li>");
+			return;
 		}
 
 		// 用于保存分页数据
@@ -203,6 +205,101 @@ $(".change-recommend").on('click', function(event) {
 		});
 	}.bind(this),2000);
 });
+
+/* 热门帖子和 论坛达人*/
+var hotTopic_and_hotPerson = {
+	hotPersonBatch : 1, //当前论坛达人批次
+	hotTopicBatch : 1, // 当前热门帖子批次
+
+	init : function(){
+		// 获取内容
+		this.getHotPerson();
+		this.getHotTopic();
+		this.setEvent();
+	},
+
+	// 获取热门贴子
+	getHotTopic : function(){
+		var batch = this.hotTopicBatch;
+		$.ajax({
+			url: 'server/hotTopic_and_hotPerson.php',
+			type: 'get',
+			dataType: 'json',
+			data: {"batch": batch},
+			success : function(result){
+				this.hotTopicBatch = result.nowBatch;
+				var context = "";
+				for(var i in result.data){
+					var list = result.data[i];
+					context += `<li><a href="#Topic/${list.topic_id}" title='${list.title}'>${list.title}</a></li>`;
+				}
+				$(".hot-topic").html(context);
+			}.bind(this),
+			error : function(msg){
+				console.log("error :"+msg);
+			}
+		});
+	},
+
+	getHotPerson : function(){
+		var batch = this.hotPersonBatch;
+		$.ajax({
+			url: 'server/hotTopic_and_hotPerson.php',
+			type: 'get',
+			dataType: 'json',
+			data: {"batch": batch,"hotPerson":true},
+			success : function(result){
+				this.hotPersonBatch = result.nowBatch;
+				var context = "";
+				for(var i in result.data){
+					var list = result.data[i];
+					context += `
+						<div class="recommend-list">
+							<div class="inline-block user-avatar">
+								<a href="#">
+									<img src="${list.user_icon}" alt="达人头像">
+								</a>
+							</div>
+							<div class="recommend-username">
+								<a href="#Personal/${list.uid}">${list.username}</a>
+								<div class="persign" title="${list.persign}">${list.persign}</div>
+							</div>
+						</div>
+					`;
+				}
+				$(".hot-person").html(context);
+			}.bind(this),
+			error : function(msg){
+				console.log("error :"+msg);
+			}
+		});		
+	},
+
+	setEvent : function(){
+		/* 点击换一批 */
+		$(".change-recommend").on('click', function(event) {
+			event.preventDefault();
+			$target = $(event.target);
+			$target.children('.glyphicon-refresh').css({
+					'transition-duration': '2s',
+					'transform': 'rotate(720deg)'
+				});
+			if($target.data('type') == "hotTopic"){
+				this.getHotTopic();
+			}
+			else if($target.data('type') == "hotPerson"){
+				this.getHotPerson();
+			}
+			setTimeout(function(){
+				console.log($(this));
+				$(this).children('.glyphicon-refresh').css({
+					'transition-duration': '0s',
+					'transform': 'rotate(0deg)'
+				});
+			}.bind(this),2000);
+		}.bind(this));
+	}
+}
 
 /* 判断 文本内容，防止 sql 注入 */
 window.preventSql = function(context){
@@ -390,52 +487,3 @@ var setEditor = {
 	}
 }
 
-
-
-
-
-
-
-
-/* 测试数据 */
-/*var testComment = [
-	"context":{
-		"topicInfo":{
-			"topicId":2,
-			"title":"做个好版主还是坏版主？",
-			"publishTime":"2016/11/2 16:23:56",
-			"viewNum":321,
-			"commentNum":123,
-			"context":"	啦啦啦德玛西亚<br>&nbsp;啦啦啦德玛西亚<br>啦啦啦德玛西亚<br><img src='imgs/banner_1.jpg' alt=''>啦啦啦啦啦德玛西亚<br><img src='imgs/user_icon_1.jpg' alt='>啦啦啦啦啦德玛西亚<br><img src='imgs/banner_5.jpg' alt='>啦啦啦德玛西亚<br>"
-		},
-		"userInfo":{
-			"userId":3,
-			"userName":"啦啦啦德玛西亚",
-			"userLevel":"吃瓜群众",
-			"userIcon":"imgs/user_icon_1.jpg",
-			"persign":"黑夜给了你黑色的眼睛，你却用它翻白眼",
-			// 用户头像
-			"userIcon":"imgs/user_icon_1.jpg",
-			// 发帖数
-			"topicNum":123,
-			// 关注数
-			"focusNum":234,
-			"listenerNum":120
-		}
-	},
-	"commit":{
-		"totalCommentNum":456,
-		"totalPageNum":45,
-		"nowPage":1,
-	}
-];
-var testSubComment = [{
-	
-	"commentList":[{
-		{
-			"topicId":3,
-			"context":"评论内容，评论内容",
-			// ""
-		},
-	}]
-}];*/

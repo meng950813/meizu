@@ -118,19 +118,11 @@
 					</div>
 				</div>
 			</div>
+			
+			<!-- 评论内容 -->
+			<div class="topic-detail-context"></div>
 
-			<div class="topic-detail-context">
-				
-				啦啦啦德玛西亚<br>
-				&nbsp;啦啦啦德玛西亚<br>
-				啦啦啦德玛西亚<br>
-				<img src="imgs/banner_1.jpg" alt="">
-				啦啦啦啦啦德玛西亚<br>
-				<img src="imgs/user_icon_1.jpg" alt="">
-				啦啦啦啦啦德玛西亚<br>
-				<img src="imgs/banner_5.jpg" alt="">
-				啦啦啦德玛西亚<br>
-			</div>
+
 			<div class="topic-option option pull-right" data-topic-id="2">
 				<a href="#" class="support-btn">支持</a>
 				<a href="#" class="oppose-btn">反对</a>
@@ -161,7 +153,6 @@
 						</a>
 					</div>
 				</div>
-
 			</div>
 			
 			<!-- 最新帖子 -->
@@ -179,13 +170,13 @@
 
 			<!-- 推荐的人 -->
 			<div class="recommend-title">
-				推荐的人
+				论坛达人
 				<span class="change-recommend color-black">
-					<i class="glyphicon glyphicon-refresh"></i> 换一批
+					<i class="glyphicon glyphicon-refresh" data-type="hotTopic"></i> 换一批
 				</span>
 			</div>
 			
-			<div class="recommend">
+			<div class="recommend hot-person">
 				<div class="recommend-list">
 					<div class="inline-block user-avatar">
 						<a href="#">
@@ -194,6 +185,7 @@
 					</div>
 					<div class="recommend-username">
 						<a href="#">用户名用户名用户名用户名用户名</a>
+						<div class="persign">个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名</div>
 					</div>
 				</div>
 				<div class="recommend-list">
@@ -204,6 +196,7 @@
 					</div>
 					<div class="recommend-username">
 						<a href="#">用户名用户名用户名用户名用户名</a>
+							<div class="persign">个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名个性签名</div>
 					</div>
 				</div>					
 			</div>
@@ -211,12 +204,12 @@
 			<!-- 推荐阅读 -->
 			<div class="recommend-topic">
 				<div class="recommend-title">
-					推荐阅读
+					热门帖子
 					<span class="change-recommend color-black">
-						<i class="glyphicon glyphicon-refresh"></i> 换一批
+						<i class="glyphicon glyphicon-refresh" data-type="hotTopic"></i> 换一批
 					</span>
 				</div>
-				<ul class="recommend-list">
+				<ul class="recommend-list hot-topic">
 					<li><a href="#">帖子1</a></li>
 					<li><a href="#">帖子1</a></li>
 					<li><a href="#">帖子1</a></li>
@@ -225,102 +218,25 @@
 			</div>
 		</div>
 
-		<!-- 评论列表 -->
-		<div class="left-part">
+		<!-- 评论列表头 -->
+		<div class="left-part" id="comment-area">
 			<div class="comment-list-head">
-				<span class="total-comment-num">999</span>条回复
+				<span class="total-comment-num">0</span>条回复
 				<span class="pull-right arrive-floor">
 					<button  id="to-floor-btn">楼层直达</button>
 					<input type="number" min="1" id="to-floor" title="跳转到指定楼层">
 				</span>
 			</div>
-
+				
+			<!-- 评论列表 -->
 			<div class="comment-list">
-				<div class="comment-detail">
-					<!-- 评论人头像 -->
-					<div class="user-avatar ">
-						<a href="#" name="floor-1">
-							<img src="imgs/user_icon_1.jpg" alt="">
-						</a>
-					</div>
 
-					<!-- 评论人详细信息：默认隐藏，鼠标移到头像上显示 -->
-					<div class="user-info">
-						<img src="imgs/user_icon_1.jpg" alt="">
-						<div class="info">
-							<p>
-								<a href="#" class="inline-block set-hide-user-name" title="用户名">username 明个人说明 username usernam eusernam </a>
-								<em class="honor inline-block"><img src="imgs/mzvip3.jpg"> 魅族版主</em>
-							</p>
-							<p>个人说明</p>
-							<p>
-								帖子：<span class="topic-num">100</span>
-								收听：<span class="listen-num">200</span>
-								听众：<span class="listener-num">300</span>
-							</p>
-							<a href="#" class="pull-right">更多信息&gt;&gt;</a>
-						</div>
-					</div>
-
-					<!-- 评论内容 -->
-					<div class="comment-detail-body">
-
-						<!-- 评论人名称，评论时间等信息 -->
-						<div class="comment-detail-head">
-							<div class="owner-info">
-								<a href="#" title="大大大大森" class="set-user-name">大大大大森</a>
-								<span><img src="imgs/mzvip3.jpg" alt=""> 魅友版主</span>
-								<span class="publish-time">2013年3月</span>
-								<span class="pull-right color-999">沙发</span>
-							</div>							
-						</div>
-
-
-						<div class="comment-detail-context">
-							<div>
-								评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容，评论内容评论内容评论内容评论内容
-							</div>
-						
-							<!-- 子评论 -->
-							<div class="sub-comment">
-								<a href="#" class="user-name inline-block" title="二级回复用户名">二级回复</a>:
-								二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容，二级评论内容
-								<div class="publish-time color-999 pull-right" data-topic-id="25">
-									<span>2014年12月6日</span>									
-									<a href="javascript:void(0)" class="color-999 reply-sub-comment">回复</a>
-								</div>
-							</div>
-							<div class="sub-comment">
-								<a href="#" class="user-name inline-block" title="二级回复用户名">另一条二级回复</a> 回复
-								<a href="#" class="user-name inline-block" title="二级回复用户名">二级回复</a> :
-								你个逗逼
-								<div class="publish-time color-999 pull-right" data-topic-id="27">
-									<span>2014年12月6日</span>
-									<a href="javascript:void(0)" data- class="color-999 reply-sub-comment">回复</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- 对于当前回复的操作 -->
-						<div class="option pull-right" data-topic-id='12'>
-							<a href="#" class="support">支持</a>
-							<a href="#" class="oppose">反对</a>
-							<a href="javascript:void(0)" class="reply reply-comment">回复</a>
-						</div>
-						
-					</div>
-				</div>
 			</div>
 
 			<!-- 分页 -->
 			<div id="page-list">
 				<span class="pre-page page-disable"><em class="pre"></em></span>
 				<ul class="page-num">
-					<li data-page-num="1" class="page-active">1</li>
-					<li data-page-num="2">2</li>
-					<li data-page-num="3">3</li>
-					<li data-page-num="4">4</li>
-					<li data-page-num="600" class="page-ignore"> ... 600</li>
 				</ul>
 				<span class="next-page"><em class="next"></em></span>
 			</div>
@@ -363,24 +279,4 @@
 <script type="text/javascript" src="dist/js/wangEditor.min.js"></script>
 <script src="js/public.js"></script>
 <script src="js/topic_detail.js"></script>
-
-<!-- <script>
-	$("a[data-toggle='collapse']").click(function(event) {
-		/* Act on the event */
-		var $target =  $($(this).attr('href'));
-		$target.toggle(function() {
-			/* Stuff to do every *odd* time the element is clicked */
-
-		}, function() {
-			/* Stuff to do every *even* time the element is clicked */
-		});
-		
-		// if($target.attr('class').indexOf(" in") == -1){
-		// 	$target.addClass('in');
-		// }
-		// else{
-		// 	$target.removeClass('in');
-		// }
-	});
-</script> -->
 </html>

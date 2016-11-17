@@ -269,16 +269,16 @@ ul,ol,dl{
   margin-left: 0;
 }
 #page-list .pre {
-  background: url(../imgs/main_icon.gif) no-repeat -118px -564px;
+  background: url(../imgs/main_icon.gif) no-repeat -116px -562px;
 }
 #page-list .next {
-  background: url(../imgs/main_icon.gif) no-repeat -144px -564px;
+  background: url(../imgs/main_icon.gif) no-repeat -141px -562px;
 }
 #page-list > .page-disable > .pre {
-  background-position: -176px -564px;
+  background-position: -175px -562px;
 }
 #page-list > .page-disable > .next {
-  background-position: -202px -564px;
+  background-position: -200px -562px;
 }
 #page-list .page-active {
   background-color: #32a5e7;
@@ -400,14 +400,30 @@ ul,ol,dl{
 	padding: 10px 0;
 	position: relative;
 }
-
+/* 头像 */
+.recommend-list img{
+	width: 5em;
+	height: 5em;
+}
+/* 用户名：显示一行 */
 .recommend-username > a{
 	display: block;
-	line-height: 3rem;
+	line-height: 2.5rem;
 	padding: 0 5px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap; 
+}
+/* 个性签名：显示两行 */
+.recommend-list .persign{
+	font-size: .8em;
+	line-height: 1.5em;
+	padding: 0 5px;
+	display: -webkit-box;
+	-webkit-box-orient:vertical;
+	-webkit-line-clamp:2;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 /* 右侧推荐内容结束 */
 
