@@ -156,15 +156,18 @@ $(".comment-list").on('click', ".option .reply-comment,.sub-comment .reply-sub-c
 	else if($(this).hasClass('reply-sub-comment')){
 		$target = $(this).parent().siblings('.user-name:first');
 	}
-	var targetContent = "<span class='reply-block'>回复 <a href='"+$target.attr('href')+"' class='user-name inline-block' title='"+$target.html()+"'>"+$target.html()+"&nbsp;</a></span><span>:</span>";
+	window.location.href="#reply-area";
+	var targetContent = "<span class='reply-block'>@<a href='"+$target.attr('href')+"' class='user-name' title='"+$target.html()+"'>"+$target.html()+"&nbsp;</a></span><b>:</b>";
 	$('#reply-topic-id').val($(this).parent().data('topic-id'));
 	$('#reply-area').html(targetContent);
-	window.location.href="#reply-area";
 });
-
+/* 回复帖子 */
 $(".reply-topic").on('click', function(event) {
-	// event.preventDefault();
-	$("#reply-topic-id").val($(this).data('topic-id')).siblings('#reply-area').html("");
+	event.preventDefault();
+	console.log("in reply_topic");
+	window.location.href = "#reply-area";
+	$("#reply-topic-id").val($(this).parent().data('topic-id'));
+	$('#reply-area').html("");
 });
 
 
@@ -173,32 +176,59 @@ $(".reply-topic").on('click', function(event) {
 var topic_detail = {
 	nowPage : 1, // 当前页号
 	totalPage : 1, // 总页数
-	listNum : 40, // 一页的数据量
+	listNum : 4, // 一页的数据量
+	totalNum : 0, // 总评论量
 
 	topic_id : 5, // 帖子 id 
 
+	isRightShow : false, // 右侧内容是否已填充
+
 	init : function(){
-		console.log("detail init");
 		// 获取帖子id
 		var search = location.search;
 		var start = search.indexOf("tp_id");
 		var end = search.indexOf("&",start);
 		// 只取值，tp_id=  占6字符
 		this.topic_id = parseInt(search.slice(start+6, end));
+		
+
 		// console.log(this.topic_id);
 		this.topic_id = 5;
+
+
 		this.getData();
-		this.newTopic();
+		// 填充右侧数据
+		this.right_part();
+
+		// 设置响应事件
+		this.setEvent();
 	},
 
-	// 获取数据
+	right_part : function(){
+		var clientW = document.body.clientWidth || document.documentElement.clientWidth;
+		/* 判断页面宽度：> 991 且 右侧未显示时，填充右侧数据 */
+		if(clientW > 991){
+			if(!this.isRightShow){
+				this.newTopic();
+				/* 热门帖子和 论坛达人*/
+				hotTopic_and_hotPerson.init();
+				this.isRightShow = true;
+			}
+		}
+		/* 当页面宽度 < 992 时，右侧隐藏，不需要获取信息*/
+		else{
+			this.isRightShow = false;
+		}
+	},
+
+	// 获取评论数据
 	getData : function(){
 		// 发起异步请求，获取数据
 		$.ajax({
 			url: 'server/topic_detail.php',
 			type: 'get',
 			dataType: 'json',
-			data: {'topic_id':5,'nowPage':this.nowPage},
+			data: {'topic_id':5,'nowPage':this.nowPage,"totalNum":this.totalNum},
 		})
 		.done(function(result) {
 			// 填充数据
@@ -206,18 +236,16 @@ var topic_detail = {
 			// 设置分页
 			setPage.init(this.nowPage,this.totalPage);
 		}.bind(this))
-		.fail(function() {
-			console.log("error");
+		.fail(function(msg) {
+			console.log("error : "+msg);
 		})
-		.always(function() {
-			console.log("complete");
-		});
+		.always(function() {});
 		
 	},
 
 	// 填充数据
 	fillData : function(result){
-		var totalNum = result.comment.page.totalNum;
+		this.totalNum = result.comment.page.totalNum;
 		// 第一页，有帖子内容
 		if(result.topicContext != null){
 
@@ -236,12 +264,12 @@ var topic_detail = {
 					<div class='sub-title'>
 						<div class='owner-info inline-block'>
 							<a href='#uid:${topicContext.uid}' title='${topicContext.username}'><b>${topicContext.username}</b></a>
-							<span class='color-999'><img src='imgs/mzvip3.jpg' alt=''> 魅友版主</span>
+							<span class='color-999'><img src='imgs/mzvip3.jpg' alt=''> 版主</span>
 						</div>
 						<div class='pull-right publish-info'>
 							<span class='publish-time'>${topicContext.publish_time}</span>
 							<span class='view-num'><i></i>${topicContext.read_count}</span>
-							<span class='comment-num'><i></i>${totalNum}</span>
+							<span class='comment-num'><i></i>${this.totalNum}</span>
 						</div>
 					</div>
 				</div>
@@ -255,21 +283,21 @@ var topic_detail = {
 		}
 
 		// 设置总评论数
-		$("#comment-area > .comment-list-head > .total-comment-num").html(totalNum);
+		$("#comment-area > .comment-list-head > .total-comment-num").html(this.totalNum);
 		// 评论内容
 		var commentList = result.comment;
 		var commentInfo = "" ;
 		// 如果有评论内容
-		if(totalNum > 0){
+		if(this.totalNum > 0){
 			// 设置页数
 			this.totalPage = commentList.page.totalPage;
 			this.nowPage = commentList.page.nowPage;
 
 
 			// 楼层
-			var floorNum = 0;
+			var floor = 1;
 			for(var i in commentList){
-				floorNum++;
+				var floorNum = (this.nowPage-1)*this.listNum + floor++;
 				if(i != "page"){
 					var comment = commentList[i];
 					// 如果有二级回复
@@ -293,9 +321,9 @@ var topic_detail = {
 						commentInfo += ` 
 							<div class="comment-detail">
 								<div class="user-avatar ">
-									<a href="#comment-detail:${comment.from_user}" name="floor-${floorNum}">
+									<a href="#comment-detail:${comment.uid}" name="floor-${floorNum}">
 										<!-- TODO -->
-										<img src="imgs/user_icon_1.jpg" alt="">
+										<img src="${comment.user_icon}" alt="">
 									</a>
 								</div>
 
@@ -307,7 +335,7 @@ var topic_detail = {
 									<!-- 评论人名称，评论时间等信息 -->
 									<div class="comment-detail-head">
 										<div class="owner-info">
-											<a href="#" title="大大大大森" class="set-user-name">大大大大森</a>
+											<a href="#" title="${comment.username}" class="set-user-name">${comment.username}</a>
 											<span><img src="imgs/mzvip3.jpg" alt=""> 魅友版主</span>
 											<span class="publish-time">${comment.publish_time}</span>
 											<span class="pull-right color-999">${this.setFloor(floorNum)}</span>
@@ -339,6 +367,17 @@ var topic_detail = {
 		}
 	},
 
+	setEvent : function(){
+		// 楼层跳转
+		$("#to-floor-btn").on('click', function(event) {
+			event.preventDefault();
+			this.toFloor();
+		}.bind(this));
+
+		//  TODO  换页
+		 
+	},
+
 	setFloor : function(floorNum){
 		switch(floorNum){
 			case 1:
@@ -357,20 +396,23 @@ var topic_detail = {
 	// 设置楼层跳转事件
 	toFloor : function(){
 		var floor = parseInt($("#to-floor").val());
+		console.log(floor);
+
+		floorPage = Math.ceil(floor/this.listNum);
+		
 		// 输入框不为空、为数字 且 在规定范围 [1,max]
 		// 每40条数据分为一页
-		if( !isNaN(floor)&& floor > 0 && floor != this.nowPage){
-
+		if( floorPage > 0){
 			// 超出楼层数量的跳转设为最后一楼
-			( floor > this.totalPage ) && ( floor = this.totalPage );
+			( floorPage > this.totalPage ) && ( floorPage = this.totalPage );
 
 			// 判断楼层跳转是否需要换页
 			// 需要跳转 的楼层 不在本页内
-			if( ((this.nowPage - 1)*this.listNum) > floor || floor < (this.nowPage * this.listNum) ){
-
+			if( floorPage != this.nowPage){
 				// 跳转楼层所在的页数
-				var pageNum = Math.ceil(floor/this.listNum);
-				setCommentInfo(pageNum);
+				this.nowPage = floorPage;
+				this.getData();
+				setPage.init(this.nowPage,this.totalPage);
 			}
 			
 			window.location.href="#floor-"+floor;
@@ -409,7 +451,6 @@ var topic_detail = {
 			data: {"topic_id": topic_id},
 		})
 		.done(function(result) {
-			console.log("success");
 			$(".new-topic-head").html(`<a href='#Personal/${result[0].uid}' title='${result.username}'>${result[0].username}</a>的最新帖子`);
 			var topicList = "";
 			for(var i in result){
@@ -419,17 +460,10 @@ var topic_detail = {
 			$(".new-topic-list").html(topicList);
 		})
 		.fail(function(msg) {
-			console.log("error");
-			console.log(msg);
+			console.log("error ："+msg);
 		})
-		.always(function() {
-			console.log("complete");
-		});
-		
+		.always(function() {});
 	}
 };
 
 topic_detail.init();
-
-/* 热门帖子和 论坛达人*/
-hotTopic_and_hotPerson.init();

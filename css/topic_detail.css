@@ -148,6 +148,11 @@
 	color: #999;
 	padding-bottom: .8em;
 }
+.owner-info>span,.owner-info>a{
+	display: inline-block;
+	vertical-align: middle;
+	padding: 0 0.8em 0 0.5em;
+}
 .comment-detail .user-avatar img{
 	width: 3em;
 	height: 3em;
@@ -163,6 +168,7 @@
 	font-size: 1em;
 	color: #32a5e7;
 	max-width: calc( 100% - 6.5em );
+	padding: 0 0.8em 0 0.5em;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -207,6 +213,12 @@
 }
 .support:hover,.oppose:hover,.reply:hover{
 	color: #333;
+}
+
+#reply-area .user-name{
+	display: inline-block;
+	vertical-align: top;
+	height: 1.2em;
 }
 
 /* 右侧推荐内容 */

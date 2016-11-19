@@ -35,6 +35,7 @@ var setPage = {
 	init : function(nowPage,totalPage){
 		this.nowPage = nowPage;
 		this.totalPage = totalPage;
+		console.log(this.nowPage,this.totalPage);
 
 		this.fillPage();
 	},
@@ -88,6 +89,7 @@ var setPage = {
 		i = 1;
 		// 当前页之后能显示的页数
 		canAdd += Math.floor(this.pageCount/2);
+		this.nowPage = parseInt(this.nowPage);
 		while(this.totalPage > (this.nowPage+i) && canAdd > 1 ){
 			pageContext += "<li data-page-num='"+(this.nowPage+i)+"'>"+ (this.nowPage+i) +"</li>";
 			i++;
@@ -108,12 +110,6 @@ var setPage = {
 		}
 
 		$("#page-list .page-num").html(pageContext);
-	},
-	getTotalPage : function(){
-		return this.totalPage;
-	},
-	getNowPage : function(){
-		return this.nowPage;
 	}
 }
 
@@ -191,25 +187,14 @@ $("#signin-expand").on('click', function(event) {
 	}
 });
 
-/* 点击换一批 */
-$(".change-recommend").on('click', function(event) {
-	event.preventDefault();
-	$(this).children('.glyphicon-refresh').css({
-			'transition-duration': '2s',
-			'transform': 'rotate(720deg)'
-		});
-	setTimeout(function(){
-		$(this).children('.glyphicon-refresh').css({
-			'transition-duration': '0s',
-			'transform': 'rotate(0deg)'
-		});
-	}.bind(this),2000);
-});
 
 /* 热门帖子和 论坛达人*/
 var hotTopic_and_hotPerson = {
 	hotPersonBatch : 1, //当前论坛达人批次
 	hotTopicBatch : 1, // 当前热门帖子批次
+
+	totalTopic: null, // 能显示的热门帖子的总数
+	totalPerson: null,
 
 	init : function(){
 		// 获取内容
@@ -220,14 +205,14 @@ var hotTopic_and_hotPerson = {
 
 	// 获取热门贴子
 	getHotTopic : function(){
-		var batch = this.hotTopicBatch;
 		$.ajax({
 			url: 'server/hotTopic_and_hotPerson.php',
 			type: 'get',
 			dataType: 'json',
-			data: {"batch": batch},
+			data: {"batch": this.hotTopicBatch,"totalData":this.totalTopic},
 			success : function(result){
 				this.hotTopicBatch = result.nowBatch;
+				this.totalTopic = this.totalData;
 				var context = "";
 				for(var i in result.data){
 					var list = result.data[i];
@@ -242,14 +227,14 @@ var hotTopic_and_hotPerson = {
 	},
 
 	getHotPerson : function(){
-		var batch = this.hotPersonBatch;
 		$.ajax({
 			url: 'server/hotTopic_and_hotPerson.php',
 			type: 'get',
 			dataType: 'json',
-			data: {"batch": batch,"hotPerson":true},
+			data: {"batch": this.hotPersonBatch,"totalData":this.totalPerson,"hotPerson":true},
 			success : function(result){
 				this.hotPersonBatch = result.nowBatch;
+				this.totalPerson = result.totalData;
 				var context = "";
 				for(var i in result.data){
 					var list = result.data[i];
@@ -290,13 +275,12 @@ var hotTopic_and_hotPerson = {
 			else if($target.data('type') == "hotPerson"){
 				this.getHotPerson();
 			}
-			setTimeout(function(){
-				console.log($(this));
-				$(this).children('.glyphicon-refresh').css({
+			setTimeout(function($target){
+				$target.children('.glyphicon-refresh').css({
 					'transition-duration': '0s',
 					'transform': 'rotate(0deg)'
 				});
-			}.bind(this),2000);
+			}.bind(this,$target),2000);
 		}.bind(this));
 	}
 }
@@ -486,4 +470,3 @@ var setEditor = {
 		return this.editor;
 	}
 }
-
